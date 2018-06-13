@@ -1,0 +1,161 @@
+@font-face {
+    font-family: 'iconfont';
+    /* project id 658440 */
+    src: url('//at.alicdn.com/t/font_658440_9qdjlc8fulqv9529.eot');
+    src: url('//at.alicdn.com/t/font_658440_9qdjlc8fulqv9529.eot?#iefix') format('embedded-opentype'), url('//at.alicdn.com/t/font_658440_9qdjlc8fulqv9529.woff') format('woff'), url('//at.alicdn.com/t/font_658440_9qdjlc8fulqv9529.ttf') format('truetype'), url('//at.alicdn.com/t/font_658440_9qdjlc8fulqv9529.svg#iconfont') format('svg');
+}
+
+.van-icon {
+    font-family: 'vant-icon', 'iconfont' !important;
+    /* color: red; */
+    font-size: 0.7rem;
+}
+
+
+/* vip */
+
+
+/* 账户设置 */
+
+.van-icon-e6a4:before {
+    content: '\e6a4';
+}
+
+
+/* 首页 */
+
+.van-icon-e606:before {
+    content: '\e606';
+}
+
+
+/* 收藏夹 */
+
+.van-icon-e619:before {
+    content: '\e619';
+}
+
+
+/* 会员 */
+
+.van-icon-e607:before {
+    content: '\e607';
+}
+
+
+/* 粉丝 */
+
+.van-icon-e60b:before {
+    content: '\e60b';
+}
+
+
+/* 直属超级会员收益 */
+
+.van-icon-e609:before {
+    content: '\e609';
+}
+
+
+/* 查询佣金币明细 */
+
+.van-icon-e600:before {
+    content: '\e600'
+}
+
+
+/* love */
+
+
+/* user */
+
+
+/* 官方客服 */
+
+.van-icon-e604:before {
+    content: '\e604';
+}
+
+
+/* 专属推广海报 */
+
+.van-icon-e60a:before {
+    content: '\e60a'
+}
+
+
+/* 我的推荐人 */
+
+.van-icon-e637:before {
+    content: '\e637'
+}
+
+
+/* 我的拼多多订单 */
+
+.van-icon-e605:before {
+    content: '\e605'
+}
+
+
+/* indexs */
+
+
+/* 置顶 */
+
+.van-icon-e752:before {
+    content: '\e752'
+}
+
+
+/* 我的 */
+
+.van-icon-e608:before {
+    content: '\e608'
+}
+
+
+/* 老师 */
+
+.van-icon-e623:before {
+    content: '\e623'
+}
+
+
+/* 金币 */
+
+.van-icon-e610:before {
+    content: '\e610'
+}
+
+
+/* 用户详情 */
+
+.van-icon-e630:before {
+    content: '\e630'
+}
+
+
+/*我的订单*/
+
+.van-icon-e609:before {
+    content: '\e608'
+}
+
+
+/* 提交订单 */
+
+.van-icon-e726:before {
+    content: '\e726'
+}
+
+
+/*券后价*/
+
+.van-icon-e65e:before {
+    content: '\e65e'
+}
+
+.van-icon-e65d::before {
+    content: '\e65d'
+}
