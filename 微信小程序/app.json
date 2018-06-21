@@ -1,0 +1,53 @@
+{
+  "pages": [
+    "pages/index/index",
+    "pages/search/search",
+    "pages/supersearch/supersearch",
+    "pages/pin/pin",
+    "pages/collection/collection",
+    "pages/my/my",
+    "pages/newview/newview",
+    "pages/pagedetail/pagedetail"
+  ],
+  "window": {
+    "backgroundTextStyle": "light",
+    "navigationBarBackgroundColor": "#fff",
+    "navigationBarTitleText": "首页",
+    "navigationBarTextStyle": "black"
+  },
+  "networkTimeout": {
+    "request": 10000,
+    "downloadFile": 10000
+  },
+  "tabBar": {
+    "color": "#818181",
+    "selectedColor": "red",
+    "borderStyle": "white",
+    "list": [
+      {
+        "pagePath": "pages/index/index",
+        "text": "淘宝",
+        "iconPath": "pages/images/icon_taobao.png",
+        "selectedIconPath": "pages/images/icon_taobao_current.png"
+      },
+      {
+        "pagePath": "pages/pin/pin",
+        "text": "拼多多",
+        "iconPath": "pages/images/icon_pin.png",
+        "selectedIconPath": "pages/images/icon_pin_current.png"
+      },
+      {
+        "pagePath": "pages/collection/collection",
+        "text": "收藏",
+        "iconPath": "pages/images/icon_collection.png",
+        "selectedIconPath": "pages/images/icon_collection_current.png"
+      },
+      {
+        "pagePath": "pages/my/my",
+        "text": "我的",
+        "iconPath": "pages/images/icon_my.png",
+        "selectedIconPath": "pages/images/icon_my_current.png"
+      }
+    ]
+  }
+}

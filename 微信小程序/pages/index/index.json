@@ -1,0 +1,9 @@
+{
+  "window": {
+    "navigationBarBackgroundColor": "#fff",
+    "navigationBarTitleText": "首页"
+  },
+  "usingComponents": {
+    "zan-icon": "/zanui/icon/index"
+  }
+}
