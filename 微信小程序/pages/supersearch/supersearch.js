@@ -120,10 +120,11 @@ Page({
   //点击跳转到商品详情
   bindViewTap: function(e) {
     var productId = e.currentTarget.dataset.id;
-    // console.log(productId);
+    var title = e.currentTarget.dataset
+    console.log(title);
     // console.log(that.data.banner)
     wx.navigateTo({
-      url: '../pagedetail/pagedetail?productId=' + productId
+      url: '../superpagedetail/superpagedetail?productId=' + productId +"&title="
     });
     // console.log(productId)
   },
