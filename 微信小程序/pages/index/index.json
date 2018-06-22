@@ -1,7 +1,7 @@
 {
   "window": {
     "navigationBarBackgroundColor": "#fff",
-    "navigationBarTitleText": "首页"
+    "navigationBarTitleText": "淘宝首页"
   },
   "usingComponents": {
     "zan-icon": "/zanui/icon/index"

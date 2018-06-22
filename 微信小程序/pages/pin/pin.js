@@ -1,7 +1,7 @@
 //index.js
 //导入js  
 var util = require('../../utils/util.js')
-var banner = require('../../utils/banner.js')
+var banner = require('../../utils/pinbanner.js')
 //获取应用实例
 const app = getApp()
 
@@ -17,25 +17,25 @@ Page({
     // tab切换  
     currentTab: 0,
     jinxuandata: [],
-    jiadiandata: [],
+    shuiguodata: [],
     muyingdata: [],
     meizhuangdata: [],
-    neiyidata: [],
-    nanzhuangdata: [],
-    nvzhuangdata: [],
-    meishidata: [],
-    jujiadata: [],
+    fushidata: [],
+    baihuodata: [],
     xiebaodata: [],
+    meishidata: [],
+    dianqidata: [],
+    jiafangdata: [],
     page: 1,
-    jiadianpage: 1,
+    shuiguopage: 1,
     muyingpage: 1,
     meizhuangpage: 1,
-    neiyipage: 1,
-    nanzhuangpage: 1,
-    nvzhuangpage: 1,
-    meishipage: 1,
-    jujiapage: 1,
+    fushipage: 1,
+    baihuopage: 1,
     xiebaopage: 1,
+    meishipage: 1,
+    dianqipage: 1,
+    jiafangpage: 1,
     isHideLoadMore: false,
     hasRefesh: false,
     hidden: false,
@@ -64,7 +64,6 @@ Page({
     banner.getbanner(function(data) {
       that.setData({
         banner: data.result,
-        url: data.result[0].url
       });
     });
   },
@@ -84,11 +83,11 @@ Page({
   //轮播图点击跳转
   onclikUrl: function(event) {
     var that = this;
-    // console.log(that.data.banner)
+    console.log(that.data.banner[0].itemId)
     wx.navigateTo({
-      url: '../newview/newview?url=' + that.data.url
+      url: '../pinpagedetail/pinpagedetail?productId=' + that.data.banner[0].itemId
     });
-    console.log(that.data.url)
+    // console.log(that.data.id)
   },
   //  滑动切换tab 
   bindChange: function(e) {
@@ -101,23 +100,23 @@ Page({
     if (tabindexs == 0) {
       that.onclikjinxuan();
     } else if (tabindexs == 1) {
-      that.onclikjiadian();
+      that.onclikshuiguo();
     } else if (tabindexs == 2) {
-      that.onclikmuying();
-    } else if (tabindexs == 3) {
-      that.onclikmeizhuang();
-    } else if (tabindexs == 4) {
-      that.onclikneiyi();
-    } else if (tabindexs == 5) {
-      that.oncliknanzhuang();
-    } else if (tabindexs == 6) {
-      that.oncliknvzhuang();
-    } else if (tabindexs == 7) {
       that.onclikmeishi();
-    } else if (tabindexs == 8) {
-      that.onclikjujia();
-    } else if (tabindexs == 9) {
+    } else if (tabindexs == 3) {
+      that.onclikfushi();
+    } else if (tabindexs == 4) {
+      that.onclikmuying();
+    } else if (tabindexs == 5) {
+      that.onclikbaihuo();
+    } else if (tabindexs == 6) {
+      that.onclikmeizhuang();
+    } else if (tabindexs == 7) {
       that.onclikxiebao();
+    } else if (tabindexs == 8) {
+      that.onclikdianqi();
+    } else if (tabindexs == 9) {
+      that.onclikjiafang();
     }
   },
   // 点击tab切换 
@@ -134,23 +133,23 @@ Page({
       if (tabindex == 0) {
         that.onclikjinxuan();
       } else if (tabindex == 1) {
-        that.onclikjiadian();
+        that.onclikshuiguo();
       } else if (tabindex == 2) {
-        that.onclikmuying();
-      } else if (tabindex == 3) {
-        that.onclikmeizhuang();
-      } else if (tabindex == 4) {
-        that.onclikneiyi();
-      } else if (tabindex == 5) {
-        that.oncliknanzhuang();
-      } else if (tabindex == 6) {
-        that.oncliknvzhuang();
-      } else if (tabindex == 7) {
         that.onclikmeishi();
-      } else if (tabindex == 8) {
-        that.onclikjujia();
-      } else if (tabindex == 9) {
+      } else if (tabindex == 3) {
+        that.onclikfushi();
+      } else if (tabindex == 4) {
+        that.onclikmuying();
+      } else if (tabindex == 5) {
+        that.onclikbaihuo();
+      } else if (tabindex == 6) {
+        that.onclikmeizhuang();
+      } else if (tabindex == 7) {
         that.onclikxiebao();
+      } else if (tabindex == 8) {
+        that.onclikdianqi();
+      } else if (tabindex == 9) {
+        that.onclikjiafang();
       }
     }
   },
@@ -160,16 +159,21 @@ Page({
     // console.log(productId);
     // console.log(that.data.banner)
     wx.navigateTo({
-      url: '../pagedetail/pagedetail?productId=' + productId
+      url: '../pinpagedetail/pinpagedetail?productId=' + productId
     });
     // console.log(productId)
   },
   //精选商品
   onclikjinxuan: function(e) {
     var that = this;
-    var pageRows = 10;
     wx.request({
-      url: 'http://shg.yuf2.cn:8080/shg-api/api/product/other/list?page=' + that.data.page + '&pageRows=' + pageRows + '&sortType=time',
+      url: app.globalData.pinduoduogoodurl,
+      data: {
+        page: 1,
+        pageSize: 10,
+        sortType: 0,
+        withCoupon: false
+      },
       method: 'GET',
       success: function(res) {
         // console.log(res.data);
@@ -191,9 +195,14 @@ Page({
     setTimeout(() => {
       // console.log('加载更多')
       var that = this;
-      var pageRows = 10;
       wx.request({
-        url: 'http://shg.yuf2.cn:8080/shg-api/api/product/other/list?page=' + (++that.data.page) + '&pageRows=' + pageRows + '&sortType=time',
+        url: app.globalData.pinduoduogoodurl,
+        data: {
+          page: ++that.data.page,
+          pageSize: 10,
+          sortType: 0,
+          withCoupon: false
+        },
         method: 'GET',
         success: function(res) {
           // console.log(res.data);
@@ -218,9 +227,14 @@ Page({
     that.setData({
       hasRefesh: true,
     });
-    var pageRows = 10;
     wx.request({
-      url: 'http://shg.yuf2.cn:8080/shg-api/api/product/other/list?page=1&pageRows=' + pageRows + '&sortType=time',
+      url: app.globalData.pinduoduogoodurl,
+      data: {
+        page: 1,
+        pageSize: 10,
+        sortType: 0,
+        withCoupon: false
+      },
       method: 'GET',
       success: function(res) {
         // console.log(res.data);
@@ -241,39 +255,51 @@ Page({
       }
     })
   },
-  //家电商品
-  onclikjiadian: function(e) {
+  //水果商品
+  onclikshuiguo: function(e) {
     var that = this;
-    var pageRows = 10;
     wx.request({
-      url: 'http://shg.yuf2.cn:8080/shg-api/api/product/other/list?tagId=10&page=' + that.data.jiadianpage + '&pageRows=' + pageRows + '&sortType=time',
+      url: app.globalData.pinduoduogoodurl,
+      data: {
+        categoryId: 13,
+        page: 1,
+        pageSize: 10,
+        sortType: 0,
+        withCoupon: false
+      },
       method: 'GET',
       success: function(res) {
         if (res.statusCode == 200) {
           var PIC = res.data.result;
           that.setData({
-            jiadiandata: PIC,
+            shuiguodata: PIC,
             hidden: true
           });
         }
       }
     })
   },
-  //家电商品上拉加载更多
-  jiadianloadMore: function(e) {
+  //水果商品上拉加载更多
+  shuiguoloadMore: function(e) {
     setTimeout(() => {
       // console.log('加载更多')
       var that = this;
-      var pageRows = 10;
       wx.request({
-        url: 'http://shg.yuf2.cn:8080/shg-api/api/product/other/list?tagId=10&page=' + (++that.data.jiadianpage) + '&pageRows=' + pageRows + '&sortType=time',
+        url: app.globalData.pinduoduogoodurl,
+        data: {
+          categoryId: 13,
+          page: ++that.data.shuiguopage,
+          pageSize: 10,
+          sortType: 0,
+          withCoupon: false
+        },
         method: 'GET',
         success: function(res) {
           // console.log(res.data);
           if (res.statusCode == 200) {
             // console.log(res.data.result)
             that.setData({
-              jiadiandata: that.data.jiadiandata.concat(res.data.result),
+              shuiguodata: that.data.shuiguodata.concat(res.data.result),
               isHideLoadMore: false,
               hidden: true,
               hasRefesh: false,
@@ -284,22 +310,28 @@ Page({
       })
     }, 1000)
   },
-  //家电商品下拉刷新
-  jiadianrefesh: function(e) {
+  //水果商品下拉刷新
+  shuiguorefesh: function(e) {
     // console.log('加载更多')
     var that = this;
     that.setData({
       hasRefesh: true,
     });
-    var pageRows = 10;
     wx.request({
-      url: 'http://shg.yuf2.cn:8080/shg-api/api/product/other/list?tagId=10&page=1&pageRows=' + pageRows + '&sortType=time',
+      url: app.globalData.pinduoduogoodurl,
+      data: {
+        categoryId: 13,
+        page: 1,
+        pageSize: 10,
+        sortType: 0,
+        withCoupon: false
+      },
       method: 'GET',
       success: function(res) {
         if (res.statusCode == 200) {
           var PIC = res.data.result;
           that.setData({
-            jinxuandata: PIC,
+            shuiguodata: PIC,
             page: 1,
             hasRefesh: false,
             hidden: true,
@@ -310,337 +342,18 @@ Page({
       }
     })
   },
-  //母婴商品
-  onclikmuying: function(e) {
-    var that = this;
-    var pageRows = 10;
-    wx.request({
-      url: 'http://shg.yuf2.cn:8080/shg-api/api/product/other/list?tagId=4&page=' + that.data.muyingpage + '&pageRows=' + pageRows + '&sortType=time',
-      method: 'GET',
-      success: function(res) {
-        if (res.statusCode == 200) {
-          // console.log(res.data.result)
-          var PIC = res.data.result;
-          that.setData({
-            muyingdata: PIC,
-            hidden: true
-          });
-        }
-      }
-    })
-  },
-  //母婴商品上拉加载更多
-  muyingloadMore: function(e) {
-    setTimeout(() => {
-      // console.log('加载更多')
-      var that = this;
-      var pageRows = 10;
-      wx.request({
-        url: 'http://shg.yuf2.cn:8080/shg-api/api/product/other/list?tagId=4&page=' + (++that.data.muyingpage) + '&pageRows=' + pageRows + '&sortType=time',
-        method: 'GET',
-        success: function(res) {
-          if (res.statusCode == 200) {
-            that.setData({
-              muyingdata: that.data.muyingdata.concat(res.data.result),
-              isHideLoadMore: false,
-              hidden: true,
-              hasRefesh: false,
-            });
-          }
-        }
-      })
-    }, 1000)
-  },
-  //母婴商品下拉刷新
-  muyingrefesh: function(e) {
-    // console.log('加载更多')
-    var that = this;
-    that.setData({
-      hasRefesh: true,
-    });
-    var pageRows = 10;
-    wx.request({
-      url: 'http://shg.yuf2.cn:8080/shg-api/api/product/other/list?tagId=4&page=1&pageRows=' + pageRows + '&sortType=time',
-      method: 'GET',
-      success: function(res) {
-        if (res.statusCode == 200) {
-          var PIC = res.data.result;
-          that.setData({
-            muyingdata: PIC,
-            page: 1,
-            hasRefesh: false,
-            hidden: true,
-          });
-        }
-      }
-    })
-  },
-  //美妆商品
-  onclikmeizhuang: function(e) {
-    var that = this;
-    var pageRows = 10;
-    wx.request({
-      url: 'http://shg.yuf2.cn:8080/shg-api/api/product/other/list?tagId=5&page=' + that.data.meizhuangpage + '&pageRows=' + pageRows + '&sortType=time',
-      method: 'GET',
-      success: function(res) {
-        if (res.statusCode == 200) {
-          // console.log(res.data.result)
-          var PIC = res.data.result;
-          that.setData({
-            meizhuangdata: PIC,
-            hidden: true
-          });
-        }
-      }
-    })
-  },
-  //美妆商品上拉加载更多
-  meizhuangloadMore: function(e) {
-    setTimeout(() => {
-      // console.log('加载更多')
-      var that = this;
-      var pageRows = 10;
-      wx.request({
-        url: 'http://shg.yuf2.cn:8080/shg-api/api/product/other/list?tagId=5&page=' + (++that.data.meizhuangpage) + '&pageRows=' + pageRows + '&sortType=time',
-        method: 'GET',
-        success: function(res) {
-          if (res.statusCode == 200) {
-            that.setData({
-              meizhuangdata: that.data.meizhuangdata.concat(res.data.result),
-              isHideLoadMore: false,
-              hidden: true,
-              hasRefesh: false,
-            });
-          }
-        }
-      })
-    }, 1000)
-  },
-  //美妆商品下拉刷新
-  meizhuangrefesh: function(e) {
-    // console.log('加载更多')
-    var that = this;
-    that.setData({
-      hasRefesh: true,
-    });
-    var pageRows = 10;
-    wx.request({
-      url: 'http://shg.yuf2.cn:8080/shg-api/api/product/other/list?tagId=5&page=1&pageRows=' + pageRows + '&sortType=time',
-      method: 'GET',
-      success: function(res) {
-        if (res.statusCode == 200) {
-          var PIC = res.data.result;
-          that.setData({
-            meizhuangdata: PIC,
-            page: 1,
-            hasRefesh: false,
-            hidden: true,
-          });
-        }
-      }
-    })
-  },
-  //内衣商品
-  onclikneiyi: function(e) {
-    var that = this;
-    var pageRows = 10;
-    wx.request({
-      url: 'http://shg.yuf2.cn:8080/shg-api/api/product/other/list?tagId=3&page=' + that.data.neiyipage + '&pageRows=' + pageRows + '&sortType=time',
-      method: 'GET',
-      success: function(res) {
-        if (res.statusCode == 200) {
-          // console.log(res.data.result)
-          var PIC = res.data.result;
-          that.setData({
-            neiyidata: PIC,
-            hidden: true
-          });
-        }
-      }
-    })
-  },
-  //内衣商品上拉加载更多
-  neiyiloadMore: function(e) {
-    setTimeout(() => {
-      // console.log('加载更多')
-      var that = this;
-      var pageRows = 10;
-      wx.request({
-        url: 'http://shg.yuf2.cn:8080/shg-api/api/product/other/list?tagId=3&page=' + (++that.data.neiyipage) + '&pageRows=' + pageRows + '&sortType=time',
-        method: 'GET',
-        success: function(res) {
-          if (res.statusCode == 200) {
-            that.setData({
-              neiyidata: that.data.neiyidata.concat(res.data.result),
-              isHideLoadMore: false,
-              hidden: true,
-              hasRefesh: false,
-            });
-          }
-        }
-      })
-    }, 1000)
-  },
-  //内衣商品下拉刷新
-  neiyirefesh: function(e) {
-    // console.log('加载更多')
-    var that = this;
-    that.setData({
-      hasRefesh: true,
-    });
-    var pageRows = 10;
-    wx.request({
-      url: 'http://shg.yuf2.cn:8080/shg-api/api/product/other/list?tagId=3&page=1&pageRows=' + pageRows + '&sortType=time',
-      method: 'GET',
-      success: function(res) {
-        if (res.statusCode == 200) {
-          var PIC = res.data.result;
-          that.setData({
-            neiyidata: PIC,
-            page: 1,
-            hasRefesh: false,
-            hidden: true,
-          });
-        }
-      }
-    })
-  },
-  //男装商品
-  oncliknanzhuang: function(e) {
-    var that = this;
-    var pageRows = 10;
-    wx.request({
-      url: 'http://shg.yuf2.cn:8080/shg-api/api/product/other/list?tagId=2&page=' + that.data.nanzhuangpage + '&pageRows=' + pageRows + '&sortType=time',
-      method: 'GET',
-      success: function(res) {
-        if (res.statusCode == 200) {
-          // console.log(res.data.result)
-          var PIC = res.data.result;
-          that.setData({
-            nanzhuangdata: PIC,
-            hidden: true
-          });
-        }
-      }
-    })
-  },
-  //男装商品上拉加载更多
-  nanzhuangloadMore: function(e) {
-    setTimeout(() => {
-      // console.log('加载更多')
-      var that = this;
-      var pageRows = 10;
-      wx.request({
-        url: 'http://shg.yuf2.cn:8080/shg-api/api/product/other/list?tagId=2&page=' + (++that.data.nanzhuangpage) + '&pageRows=' + pageRows + '&sortType=time',
-        method: 'GET',
-        success: function(res) {
-          if (res.statusCode == 200) {
-            that.setData({
-              nanzhuangdata: that.data.nanzhuangdata.concat(res.data.result),
-              isHideLoadMore: false,
-              hidden: true,
-              hasRefesh: false,
-            });
-          }
-        }
-      })
-    }, 1000)
-  },
-  //男装商品下拉刷新
-  nanzhuangrefesh: function(e) {
-    // console.log('加载更多')
-    var that = this;
-    that.setData({
-      hasRefesh: true,
-    });
-    var pageRows = 10;
-    wx.request({
-      url: 'http://shg.yuf2.cn:8080/shg-api/api/product/other/list?tagId=2&page=1&pageRows=' + pageRows + '&sortType=time',
-      method: 'GET',
-      success: function(res) {
-        if (res.statusCode == 200) {
-          var PIC = res.data.result;
-          that.setData({
-            nanzhuangdata: PIC,
-            page: 1,
-            hasRefesh: false,
-            hidden: true,
-          });
-        }
-      }
-    })
-  },
-  //女装商品
-  oncliknvzhuang: function(e) {
-    var that = this;
-    var pageRows = 10;
-    wx.request({
-      url: 'http://shg.yuf2.cn:8080/shg-api/api/product/other/list?tagId=1&page=' + that.data.nvzhuangpage + '&pageRows=' + pageRows + '&sortType=time',
-      method: 'GET',
-      success: function(res) {
-        if (res.statusCode == 200) {
-          // console.log(res.data.result)
-          var PIC = res.data.result;
-          that.setData({
-            nvzhuangdata: PIC,
-            hidden: true
-          });
-        }
-      }
-    })
-  },
-  //女装商品上拉加载更多
-  nvzhuangloadMore: function(e) {
-    setTimeout(() => {
-      // console.log('加载更多')
-      var that = this;
-      var pageRows = 10;
-      wx.request({
-        url: 'http://shg.yuf2.cn:8080/shg-api/api/product/other/list?tagId=1&page=' + (++that.data.nvzhuangpage) + '&pageRows=' + pageRows + '&sortType=time',
-        method: 'GET',
-        success: function(res) {
-          if (res.statusCode == 200) {
-            that.setData({
-              nvzhuangdata: that.data.nvzhuangdata.concat(res.data.result),
-              isHideLoadMore: false,
-              hidden: true,
-              hasRefesh: false,
-            });
-          }
-        }
-      })
-    }, 1000)
-  },
-  //女装商品下拉刷新
-  nvzhuangrefesh: function(e) {
-    // console.log('加载更多')
-    var that = this;
-    that.setData({
-      hasRefesh: true,
-    });
-    var pageRows = 10;
-    wx.request({
-      url: 'http://shg.yuf2.cn:8080/shg-api/api/product/other/list?tagId=1&page=1&pageRows=' + pageRows + '&sortType=time',
-      method: 'GET',
-      success: function(res) {
-        if (res.statusCode == 200) {
-          var PIC = res.data.result;
-          that.setData({
-            nvzhuangdata: PIC,
-            page: 1,
-            hasRefesh: false,
-            hidden: true,
-          });
-        }
-      }
-    })
-  },
   //美食商品
   onclikmeishi: function(e) {
     var that = this;
-    var pageRows = 10;
     wx.request({
-      url: 'http://shg.yuf2.cn:8080/shg-api/api/product/other/list?tagId=8&page=' + that.data.meishipage + '&pageRows=' + pageRows + '&sortType=time',
+      url: app.globalData.pinduoduogoodurl,
+      data: {
+        categoryId: 1,
+        page: 1,
+        pageSize: 10,
+        sortType: 0,
+        withCoupon: false
+      },
       method: 'GET',
       success: function(res) {
         if (res.statusCode == 200) {
@@ -659,9 +372,15 @@ Page({
     setTimeout(() => {
       // console.log('加载更多')
       var that = this;
-      var pageRows = 10;
       wx.request({
-        url: 'http://shg.yuf2.cn:8080/shg-api/api/product/other/list?tagId=8&page=' + (++that.data.meishipage) + '&pageRows=' + pageRows + '&sortType=time',
+        url: app.globalData.pinduoduogoodurl,
+        data: {
+          categoryId: 1,
+          page: ++that.data.meishipage,
+          pageSize: 10,
+          sortType: 0,
+          withCoupon: false
+        },
         method: 'GET',
         success: function(res) {
           if (res.statusCode == 200) {
@@ -683,16 +402,22 @@ Page({
     that.setData({
       hasRefesh: true,
     });
-    var pageRows = 10;
     wx.request({
-      url: 'http://shg.yuf2.cn:8080/shg-api/api/product/other/list?tagId=8&page=1&pageRows=' + pageRows + '&sortType=time',
+      url: app.globalData.pinduoduogoodurl,
+      data: {
+        categoryId: 1,
+        page: 1,
+        pageSize: 10,
+        sortType: 0,
+        withCoupon: false
+      },
       method: 'GET',
       success: function(res) {
         if (res.statusCode == 200) {
           var PIC = res.data.result;
           that.setData({
             meishidata: PIC,
-            page: 1,
+            meishipage: 1,
             hasRefesh: false,
             hidden: true,
           });
@@ -700,38 +425,51 @@ Page({
       }
     })
   },
-  //居家商品
-  onclikjujia: function(e) {
+  //服饰商品
+  onclikfushi: function(e) {
     var that = this;
-    var pageRows = 10;
     wx.request({
-      url: 'http://shg.yuf2.cn:8080/shg-api/api/product/other/list?tagId=6&page=' + that.data.jujiapage + '&pageRows=' + pageRows + '&sortType=time',
+      url: app.globalData.pinduoduogoodurl,
+      data: {
+        categoryId: 14,
+        page: 1,
+        pageSize: 10,
+        sortType: 0,
+        withCoupon: false
+      },
       method: 'GET',
       success: function(res) {
         if (res.statusCode == 200) {
           // console.log(res.data.result)
           var PIC = res.data.result;
           that.setData({
-            jujiadata: PIC,
+            fushidata: PIC,
             hidden: true
           });
         }
       }
     })
   },
-  //居家商品上拉加载更多
-  jujialoadMore: function(e) {
+  //服饰商品上拉加载更多
+  fushiloadMore: function(e) {
     setTimeout(() => {
       // console.log('加载更多')
       var that = this;
       var pageRows = 10;
       wx.request({
-        url: 'http://shg.yuf2.cn:8080/shg-api/api/product/other/list?tagId=6&page=' + (++that.data.jujiapage) + '&pageRows=' + pageRows + '&sortType=time',
+        url: app.globalData.pinduoduogoodurl,
+        data: {
+          categoryId: 14,
+          page: ++that.data.fushipage,
+          pageSize: 10,
+          sortType: 0,
+          withCoupon: false
+        },
         method: 'GET',
         success: function(res) {
           if (res.statusCode == 200) {
             that.setData({
-              jujiadata: that.data.jujiadata.concat(res.data.result),
+              fushidata: that.data.fushidata.concat(res.data.result),
               isHideLoadMore: false,
               hidden: true,
               hasRefesh: false,
@@ -741,8 +479,8 @@ Page({
       })
     }, 1000)
   },
-  //居家商品下拉刷新
-  jujiarefesh: function(e) {
+  //服饰商品下拉刷新
+  fushirefesh: function(e) {
     // console.log('加载更多')
     var that = this;
     that.setData({
@@ -750,14 +488,21 @@ Page({
     });
     var pageRows = 10;
     wx.request({
-      url: 'http://shg.yuf2.cn:8080/shg-api/api/product/other/list?tagId=6&page=1&pageRows=' + pageRows + '&sortType=time',
+      url: app.globalData.pinduoduogoodurl,
+      data: {
+        categoryId: 14,
+        page: 1,
+        pageSize: 10,
+        sortType: 0,
+        withCoupon: false
+      },
       method: 'GET',
       success: function(res) {
         if (res.statusCode == 200) {
           var PIC = res.data.result;
           that.setData({
-            jujiadata: PIC,
-            page: 1,
+            fushidata: PIC,
+            fushipage: 1,
             hasRefesh: false,
             hidden: true,
           });
@@ -765,12 +510,267 @@ Page({
       }
     })
   },
-  //鞋包配饰商品
+  //母婴商品
+  onclikmuying: function(e) {
+    var that = this;
+    wx.request({
+      url: app.globalData.pinduoduogoodurl,
+      data: {
+        categoryId: 4,
+        page: 1,
+        pageSize: 10,
+        sortType: 0,
+        withCoupon: false
+      },
+      method: 'GET',
+      success: function(res) {
+        if (res.statusCode == 200) {
+          // console.log(res.data.result)
+          var PIC = res.data.result;
+          that.setData({
+            muyingdata: PIC,
+            hidden: true
+          });
+        }
+      }
+    })
+  },
+  //母婴商品上拉加载更多
+  muyingloadMore: function(e) {
+    setTimeout(() => {
+      // console.log('加载更多')
+      var that = this;
+      wx.request({
+        url: app.globalData.pinduoduogoodurl,
+        data: {
+          categoryId: 4,
+          page: ++that.data.muyingpage,
+          pageSize: 10,
+          sortType: 0,
+          withCoupon: false
+        },
+        method: 'GET',
+        success: function(res) {
+          if (res.statusCode == 200) {
+            that.setData({
+              muyingdata: that.data.muyingdata.concat(res.data.result),
+              isHideLoadMore: false,
+              hidden: true,
+              hasRefesh: false,
+            });
+          }
+        }
+      })
+    }, 1000)
+  },
+  //母婴商品下拉刷新
+  muyingrefesh: function(e) {
+    // console.log('加载更多')
+    var that = this;
+    that.setData({
+      hasRefesh: true,
+    });
+    wx.request({
+      url: app.globalData.pinduoduogoodurl,
+      data: {
+        categoryId: 4,
+        page: 1,
+        pageSize: 10,
+        sortType: 0,
+        withCoupon: false
+      },
+      method: 'GET',
+      success: function(res) {
+        if (res.statusCode == 200) {
+          var PIC = res.data.result;
+          that.setData({
+            muyingdata: PIC,
+            muyingpage: 1,
+            hasRefesh: false,
+            hidden: true,
+          });
+        }
+      }
+    })
+  },
+  //百货商品
+  onclikbaihuo: function(e) {
+    var that = this;
+    wx.request({
+      url: app.globalData.pinduoduogoodurl,
+      data: {
+        categoryId: 15,
+        page: 1,
+        pageSize: 10,
+        sortType: 0,
+        withCoupon: false
+      },
+      method: 'GET',
+      success: function(res) {
+        if (res.statusCode == 200) {
+          // console.log(res.data.result)
+          var PIC = res.data.result;
+          that.setData({
+            baihuodata: PIC,
+            hidden: true
+          });
+        }
+      }
+    })
+  },
+  //百货商品上拉加载更多
+  baihuoloadMore: function(e) {
+    setTimeout(() => {
+      // console.log('加载更多')
+      var that = this;
+      wx.request({
+        url: app.globalData.pinduoduogoodurl,
+        data: {
+          categoryId: 15,
+          page: ++that.data.baihuopage,
+          pageSize: 10,
+          sortType: 0,
+          withCoupon: false
+        },
+        method: 'GET',
+        success: function(res) {
+          if (res.statusCode == 200) {
+            that.setData({
+              baihuodata: that.data.baihuodata.concat(res.data.result),
+              isHideLoadMore: false,
+              hidden: true,
+              hasRefesh: false,
+            });
+          }
+        }
+      })
+    }, 1000)
+  },
+  //百货商品下拉刷新
+  baihuorefesh: function(e) {
+    // console.log('加载更多')
+    var that = this;
+    that.setData({
+      hasRefesh: true,
+    });
+    wx.request({
+      url: app.globalData.pinduoduogoodurl,
+      data: {
+        categoryId: 15,
+        page: 1,
+        pageSize: 10,
+        sortType: 0,
+        withCoupon: false
+      },
+      method: 'GET',
+      success: function(res) {
+        if (res.statusCode == 200) {
+          var PIC = res.data.result;
+          that.setData({
+            baihuodata: PIC,
+            baihuopage: 1,
+            hasRefesh: false,
+            hidden: true,
+          });
+        }
+      }
+    })
+  },
+  //美妆商品
+  onclikmeizhuang: function(e) {
+    var that = this;
+    wx.request({
+      url: app.globalData.pinduoduogoodurl,
+      data: {
+        categoryId: 16,
+        page: 1,
+        pageSize: 10,
+        sortType: 0,
+        withCoupon: false
+      },
+      method: 'GET',
+      success: function(res) {
+        if (res.statusCode == 200) {
+          // console.log(res.data.result)
+          var PIC = res.data.result;
+          that.setData({
+            meizhuangdata: PIC,
+            hidden: true
+          });
+        }
+      }
+    })
+  },
+  //美妆商品上拉加载更多
+  meizhuangloadMore: function(e) {
+    setTimeout(() => {
+      // console.log('加载更多')
+      var that = this;
+      wx.request({
+        url: app.globalData.pinduoduogoodurl,
+        data: {
+          categoryId: 16,
+          page: ++that.data.meizhuangpage,
+          pageSize: 10,
+          sortType: 0,
+          withCoupon: false
+        },
+        method: 'GET',
+        success: function(res) {
+          if (res.statusCode == 200) {
+            that.setData({
+              meizhuangdata: that.data.meizhuangdata.concat(res.data.result),
+              isHideLoadMore: false,
+              hidden: true,
+              hasRefesh: false,
+            });
+          }
+        }
+      })
+    }, 1000)
+  },
+  //美妆商品下拉刷新
+  meizhuangrefesh: function(e) {
+    // console.log('加载更多')
+    var that = this;
+    that.setData({
+      hasRefesh: true,
+    });
+    wx.request({
+      url: app.globalData.pinduoduogoodurl,
+      data: {
+        categoryId: 16,
+        page: 1,
+        pageSize: 10,
+        sortType: 0,
+        withCoupon: false
+      },
+      method: 'GET',
+      success: function(res) {
+        if (res.statusCode == 200) {
+          var PIC = res.data.result;
+          that.setData({
+            meizhuangdata: PIC,
+            meizhuangpage: 1,
+            hasRefesh: false,
+            hidden: true,
+          });
+        }
+      }
+    })
+  },
+  //鞋包商品
   onclikxiebao: function(e) {
     var that = this;
-    var pageRows = 10;
     wx.request({
-      url: 'http://shg.yuf2.cn:8080/shg-api/api/product/other/list?tagId=7&page=' + that.data.xiebaopage + '&pageRows=' + pageRows + '&sortType=time',
+      url: app.globalData.pinduoduogoodurl,
+      data: {
+        categoryId: 1281,
+        page: 1,
+        pageSize: 10,
+        sortType: 0,
+        withCoupon: false
+      },
       method: 'GET',
       success: function(res) {
         if (res.statusCode == 200) {
@@ -784,14 +784,20 @@ Page({
       }
     })
   },
-  //鞋包配饰商品上拉加载更多
+  //鞋包商品上拉加载更多
   xiebaoloadMore: function(e) {
     setTimeout(() => {
       // console.log('加载更多')
       var that = this;
-      var pageRows = 10;
       wx.request({
-        url: 'http://shg.yuf2.cn:8080/shg-api/api/product/other/list?tagId=7&page=' + (++that.data.xiebaopage) + '&pageRows=' + pageRows + '&sortType=time',
+        url: app.globalData.pinduoduogoodurl,
+        data: {
+          categoryId: 1281,
+          page: ++that.data.xiebaopage,
+          pageSize: 10,
+          sortType: 0,
+          withCoupon: false
+        },
         method: 'GET',
         success: function(res) {
           if (res.statusCode == 200) {
@@ -806,23 +812,195 @@ Page({
       })
     }, 1000)
   },
-  //鞋包配饰商品下拉刷新
+  //鞋包商品下拉刷新
   xiebaorefesh: function(e) {
     // console.log('加载更多')
     var that = this;
     that.setData({
       hasRefesh: true,
     });
-    var pageRows = 10;
     wx.request({
-      url: 'http://shg.yuf2.cn:8080/shg-api/api/product/other/list?tagId=7&page=1&pageRows=' + pageRows + '&sortType=time',
+      url: app.globalData.pinduoduogoodurl,
+      data: {
+        categoryId: 1281,
+        page: 1,
+        pageSize: 10,
+        sortType: 0,
+        withCoupon: false
+      },
       method: 'GET',
       success: function(res) {
         if (res.statusCode == 200) {
           var PIC = res.data.result;
           that.setData({
             xiebaodata: PIC,
-            page: 1,
+            xiebaopage: 1,
+            hasRefesh: false,
+            hidden: true,
+          });
+        }
+      }
+    })
+  },
+  //电器商品
+  onclikdianqi: function(e) {
+    var that = this;
+    wx.request({
+      url: app.globalData.pinduoduogoodurl,
+      data: {
+        categoryId: 18,
+        page: 1,
+        pageSize: 10,
+        sortType: 0,
+        withCoupon: false
+      },
+      method: 'GET',
+      success: function(res) {
+        if (res.statusCode == 200) {
+          // console.log(res.data.result)
+          var PIC = res.data.result;
+          that.setData({
+            dianqidata: PIC,
+            hidden: true
+          });
+        }
+      }
+    })
+  },
+  //电器商品上拉加载更多
+  dianqiloadMore: function(e) {
+    setTimeout(() => {
+      // console.log('加载更多')
+      var that = this;
+      wx.request({
+        url: app.globalData.pinduoduogoodurl,
+        data: {
+          categoryId: 18,
+          page: ++that.data.dianqipage,
+          pageSize: 10,
+          sortType: 0,
+          withCoupon: false
+        },
+        method: 'GET',
+        success: function(res) {
+          if (res.statusCode == 200) {
+            that.setData({
+              dianqidata: that.data.dianqidata.concat(res.data.result),
+              isHideLoadMore: false,
+              hidden: true,
+              hasRefesh: false,
+            });
+          }
+        }
+      })
+    }, 1000)
+  },
+  //电器商品下拉刷新
+  dianqirefesh: function(e) {
+    // console.log('加载更多')
+    var that = this;
+    that.setData({
+      hasRefesh: true,
+    });
+    wx.request({
+      url: app.globalData.pinduoduogoodurl,
+      data: {
+        categoryId: 18,
+        page: 1,
+        pageSize: 10,
+        sortType: 0,
+        withCoupon: false
+      },
+      method: 'GET',
+      success: function(res) {
+        if (res.statusCode == 200) {
+          var PIC = res.data.result;
+          that.setData({
+            dianqidata: PIC,
+            dianqipage: 1,
+            hasRefesh: false,
+            hidden: true,
+          });
+        }
+      }
+    })
+  },
+  //家纺商品
+  onclikjiafang: function(e) {
+    var that = this;
+    wx.request({
+      url: app.globalData.pinduoduogoodurl,
+      data: {
+        categoryId: 818,
+        page: 1,
+        pageSize: 10,
+        sortType: 0,
+        withCoupon: false
+      },
+      method: 'GET',
+      success: function(res) {
+        if (res.statusCode == 200) {
+          // console.log(res.data.result)
+          var PIC = res.data.result;
+          that.setData({
+            jiafangdata: PIC,
+            hidden: true
+          });
+        }
+      }
+    })
+  },
+  //家纺商品上拉加载更多
+  jiafangloadMore: function(e) {
+    setTimeout(() => {
+      // console.log('加载更多')
+      var that = this;
+      wx.request({
+        url: app.globalData.pinduoduogoodurl,
+        data: {
+          categoryId: 818,
+          page: ++that.data.jiafangpage,
+          pageSize: 10,
+          sortType: 0,
+          withCoupon: false
+        },
+        method: 'GET',
+        success: function(res) {
+          if (res.statusCode == 200) {
+            that.setData({
+              jiafangdata: that.data.jiafangdata.concat(res.data.result),
+              isHideLoadMore: false,
+              hidden: true,
+              hasRefesh: false,
+            });
+          }
+        }
+      })
+    }, 1000)
+  },
+  //家纺商品下拉刷新
+  jiafangrefesh: function(e) {
+    // console.log('加载更多')
+    var that = this;
+    that.setData({
+      hasRefesh: true,
+    });
+    wx.request({
+      url: app.globalData.pinduoduogoodurl,
+      data: {
+        categoryId: 818,
+        page: 1,
+        pageSize: 10,
+        sortType: 0,
+        withCoupon: false
+      },
+      method: 'GET',
+      success: function(res) {
+        if (res.statusCode == 200) {
+          var PIC = res.data.result;
+          that.setData({
+            jiafangdata: PIC,
+            jiafangpage: 1,
             hasRefesh: false,
             hidden: true,
           });
@@ -882,10 +1060,20 @@ Page({
     //let data;
     var that = this;
     //let localStorageValue = [];
-    if (this.data.inputValue != '') {
+    if (this.data.inputValue.trim() != '') {
       //将搜索记录更新到缓存
       var searchData = that.data.sercherStorage;
-      // console.log(searchData)
+      // 如果搜索记录里面有重复的，要做删除操作
+      for (let i = 0; i < searchData.length; i++) {
+        if (searchData[i] == this.data.inputValue.trim()) {
+          searchData.splice(i, 1);
+          break;
+        }
+        // console.log(searchData.length)
+      }
+      // 如果超过8条搜索记录的话，删掉最旧的一条
+      if (searchData.length >= 5) searchData.pop();
+      // // console.log(searchData)
       searchData.push({
         id: searchData.length,
         name: that.data.inputValue
@@ -895,9 +1083,24 @@ Page({
         StorageFlag: false,
       })
     }
-    console.log(that.data.inputValue)
-      wx.navigateTo({
-        url: '../search/search?keyword=' + that.data.inputValue
+    // console.log(that.data.inputValue)
+    if (that.data.inputValue.trim() == '' || that.data.inputValue.trim() == null) {
+      wx.showToast({
+        title: '商品为空哦',
+        icon: 'loading',
+        duration: 2000,
+        mask: true
       })
+    } else {
+      wx.navigateTo({
+        url: '../pinsearch/pinsearch?keyword=' + that.data.inputValue.trim()
+      })
+      wx.showToast({
+        title: '正在搜索中',
+        icon: 'loading',
+        duration: 2000,
+        mask: true
+      })
+    }
   },
 })

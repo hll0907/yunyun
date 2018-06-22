@@ -169,7 +169,7 @@ Page({
     var that = this;
     var pageRows = 10;
     wx.request({
-      url: 'http://shg.yuf2.cn/shg-api/api/product/other/list?page=' + that.data.page + '&pageRows=' + pageRows + '&sortType=time',
+      url: app.globalData.taobaogoodurl + 'page=' + that.data.page + '&pageRows=' + pageRows + '&sortType=time',
       method: 'GET',
       success: function(res) {
         // console.log(res.data);
@@ -193,7 +193,7 @@ Page({
       var that = this;
       var pageRows = 10;
       wx.request({
-        url: 'http://shg.yuf2.cn/shg-api/api/product/other/list?page=' + (++that.data.page) + '&pageRows=' + pageRows + '&sortType=time',
+        url: app.globalData.taobaogoodurl + 'page=' + (++that.data.page) + '&pageRows=' + pageRows + '&sortType=time',
         method: 'GET',
         success: function(res) {
           // console.log(res.data);
@@ -220,7 +220,7 @@ Page({
     });
     var pageRows = 10;
     wx.request({
-      url: 'http://shg.yuf2.cn/shg-api/api/product/other/list?page=1&pageRows=' + pageRows + '&sortType=time',
+      url: app.globalData.taobaogoodurl + 'page=1&pageRows=' + pageRows + '&sortType=time',
       method: 'GET',
       success: function(res) {
         // console.log(res.data);
@@ -246,7 +246,7 @@ Page({
     var that = this;
     var pageRows = 10;
     wx.request({
-      url: 'http://shg.yuf2.cn/shg-api/api/product/other/list?tagId=10&page=' + that.data.jiadianpage + '&pageRows=' + pageRows + '&sortType=time',
+      url: app.globalData.taobaogoodurl + 'tagId=10&page=' + that.data.jiadianpage + '&pageRows=' + pageRows + '&sortType=time',
       method: 'GET',
       success: function(res) {
         if (res.statusCode == 200) {
@@ -266,7 +266,7 @@ Page({
       var that = this;
       var pageRows = 10;
       wx.request({
-        url: 'http://shg.yuf2.cn/shg-api/api/product/other/list?tagId=10&page=' + (++that.data.jiadianpage) + '&pageRows=' + pageRows + '&sortType=time',
+        url: app.globalData.taobaogoodurl + 'tagId=10&page=' + (++that.data.jiadianpage) + '&pageRows=' + pageRows + '&sortType=time',
         method: 'GET',
         success: function(res) {
           // console.log(res.data);
@@ -293,13 +293,13 @@ Page({
     });
     var pageRows = 10;
     wx.request({
-      url: 'http://shg.yuf2.cn/shg-api/api/product/other/list?tagId=10&page=1&pageRows=' + pageRows + '&sortType=time',
+      url: app.globalData.taobaogoodurl + 'tagId=10&page=1&pageRows=' + pageRows + '&sortType=time',
       method: 'GET',
       success: function(res) {
         if (res.statusCode == 200) {
           var PIC = res.data.result;
           that.setData({
-            jinxuandata: PIC,
+            jiadiandata: PIC,
             jiadianpage: 1,
             hasRefesh: false,
             hidden: true,
@@ -315,7 +315,7 @@ Page({
     var that = this;
     var pageRows = 10;
     wx.request({
-      url: 'http://shg.yuf2.cn/shg-api/api/product/other/list?tagId=4&page=' + that.data.muyingpage + '&pageRows=' + pageRows + '&sortType=time',
+      url: app.globalData.taobaogoodurl + 'tagId=4&page=' + that.data.muyingpage + '&pageRows=' + pageRows + '&sortType=time',
       method: 'GET',
       success: function(res) {
         if (res.statusCode == 200) {
@@ -336,7 +336,7 @@ Page({
       var that = this;
       var pageRows = 10;
       wx.request({
-        url: 'http://shg.yuf2.cn/shg-api/api/product/other/list?tagId=4&page=' + (++that.data.muyingpage) + '&pageRows=' + pageRows + '&sortType=time',
+        url: app.globalData.taobaogoodurl + 'tagId=4&page=' + (++that.data.muyingpage) + '&pageRows=' + pageRows + '&sortType=time',
         method: 'GET',
         success: function(res) {
           if (res.statusCode == 200) {
@@ -360,7 +360,7 @@ Page({
     });
     var pageRows = 10;
     wx.request({
-      url: 'http://shg.yuf2.cn/shg-api/api/product/other/list?tagId=4&page=1&pageRows=' + pageRows + '&sortType=time',
+      url: app.globalData.taobaogoodurl + 'tagId=4&page=1&pageRows=' + pageRows + '&sortType=time',
       method: 'GET',
       success: function(res) {
         if (res.statusCode == 200) {
@@ -380,7 +380,7 @@ Page({
     var that = this;
     var pageRows = 10;
     wx.request({
-      url: 'http://shg.yuf2.cn/shg-api/api/product/other/list?tagId=5&page=' + that.data.meizhuangpage + '&pageRows=' + pageRows + '&sortType=time',
+      url: app.globalData.taobaogoodurl + 'tagId=5&page=' + that.data.meizhuangpage + '&pageRows=' + pageRows + '&sortType=time',
       method: 'GET',
       success: function(res) {
         if (res.statusCode == 200) {
@@ -401,7 +401,7 @@ Page({
       var that = this;
       var pageRows = 10;
       wx.request({
-        url: 'http://shg.yuf2.cn/shg-api/api/product/other/list?tagId=5&page=' + (++that.data.meizhuangpage) + '&pageRows=' + pageRows + '&sortType=time',
+        url: app.globalData.taobaogoodurl + 'tagId=5&page=' + (++that.data.meizhuangpage) + '&pageRows=' + pageRows + '&sortType=time',
         method: 'GET',
         success: function(res) {
           if (res.statusCode == 200) {
@@ -425,7 +425,7 @@ Page({
     });
     var pageRows = 10;
     wx.request({
-      url: 'http://shg.yuf2.cn/shg-api/api/product/other/list?tagId=5&page=1&pageRows=' + pageRows + '&sortType=time',
+      url: app.globalData.taobaogoodurl + 'tagId=5&page=1&pageRows=' + pageRows + '&sortType=time',
       method: 'GET',
       success: function(res) {
         if (res.statusCode == 200) {
@@ -445,7 +445,7 @@ Page({
     var that = this;
     var pageRows = 10;
     wx.request({
-      url: 'http://shg.yuf2.cn/shg-api/api/product/other/list?tagId=3&page=' + that.data.neiyipage + '&pageRows=' + pageRows + '&sortType=time',
+      url: app.globalData.taobaogoodurl + 'tagId=3&page=' + that.data.neiyipage + '&pageRows=' + pageRows + '&sortType=time',
       method: 'GET',
       success: function(res) {
         if (res.statusCode == 200) {
@@ -466,7 +466,7 @@ Page({
       var that = this;
       var pageRows = 10;
       wx.request({
-        url: 'http://shg.yuf2.cn/shg-api/api/product/other/list?tagId=3&page=' + (++that.data.neiyipage) + '&pageRows=' + pageRows + '&sortType=time',
+        url: app.globalData.taobaogoodurl + 'tagId=3&page=' + (++that.data.neiyipage) + '&pageRows=' + pageRows + '&sortType=time',
         method: 'GET',
         success: function(res) {
           if (res.statusCode == 200) {
@@ -490,7 +490,7 @@ Page({
     });
     var pageRows = 10;
     wx.request({
-      url: 'http://shg.yuf2.cn/shg-api/api/product/other/list?tagId=3&page=1&pageRows=' + pageRows + '&sortType=time',
+      url: app.globalData.taobaogoodurl + 'tagId=3&page=1&pageRows=' + pageRows + '&sortType=time',
       method: 'GET',
       success: function(res) {
         if (res.statusCode == 200) {
@@ -510,7 +510,7 @@ Page({
     var that = this;
     var pageRows = 10;
     wx.request({
-      url: 'http://shg.yuf2.cn/shg-api/api/product/other/list?tagId=2&page=' + that.data.nanzhuangpage + '&pageRows=' + pageRows + '&sortType=time',
+      url: app.globalData.taobaogoodurl + 'tagId=2&page=' + that.data.nanzhuangpage + '&pageRows=' + pageRows + '&sortType=time',
       method: 'GET',
       success: function(res) {
         if (res.statusCode == 200) {
@@ -531,7 +531,7 @@ Page({
       var that = this;
       var pageRows = 10;
       wx.request({
-        url: 'http://shg.yuf2.cn/shg-api/api/product/other/list?tagId=2&page=' + (++that.data.nanzhuangpage) + '&pageRows=' + pageRows + '&sortType=time',
+        url: app.globalData.taobaogoodurl + 'tagId=2&page=' + (++that.data.nanzhuangpage) + '&pageRows=' + pageRows + '&sortType=time',
         method: 'GET',
         success: function(res) {
           if (res.statusCode == 200) {
@@ -555,7 +555,7 @@ Page({
     });
     var pageRows = 10;
     wx.request({
-      url: 'http://shg.yuf2.cn/shg-api/api/product/other/list?tagId=2&page=1&pageRows=' + pageRows + '&sortType=time',
+      url: app.globalData.taobaogoodurl + 'tagId=2&page=1&pageRows=' + pageRows + '&sortType=time',
       method: 'GET',
       success: function(res) {
         if (res.statusCode == 200) {
@@ -575,7 +575,7 @@ Page({
     var that = this;
     var pageRows = 10;
     wx.request({
-      url: 'http://shg.yuf2.cn/shg-api/api/product/other/list?tagId=1&page=' + that.data.nvzhuangpage + '&pageRows=' + pageRows + '&sortType=time',
+      url: app.globalData.taobaogoodurl + 'tagId=1&page=' + that.data.nvzhuangpage + '&pageRows=' + pageRows + '&sortType=time',
       method: 'GET',
       success: function(res) {
         if (res.statusCode == 200) {
@@ -596,7 +596,7 @@ Page({
       var that = this;
       var pageRows = 10;
       wx.request({
-        url: 'http://shg.yuf2.cn/shg-api/api/product/other/list?tagId=1&page=' + (++that.data.nvzhuangpage) + '&pageRows=' + pageRows + '&sortType=time',
+        url: app.globalData.taobaogoodurl + 'tagId=1&page=' + (++that.data.nvzhuangpage) + '&pageRows=' + pageRows + '&sortType=time',
         method: 'GET',
         success: function(res) {
           if (res.statusCode == 200) {
@@ -620,7 +620,7 @@ Page({
     });
     var pageRows = 10;
     wx.request({
-      url: 'http://shg.yuf2.cn/shg-api/api/product/other/list?tagId=1&page=1&pageRows=' + pageRows + '&sortType=time',
+      url: app.globalData.taobaogoodurl + 'tagId=1&page=1&pageRows=' + pageRows + '&sortType=time',
       method: 'GET',
       success: function(res) {
         if (res.statusCode == 200) {
@@ -640,7 +640,7 @@ Page({
     var that = this;
     var pageRows = 10;
     wx.request({
-      url: 'http://shg.yuf2.cn/shg-api/api/product/other/list?tagId=8&page=' + that.data.meishipage + '&pageRows=' + pageRows + '&sortType=time',
+      url: app.globalData.taobaogoodurl + 'tagId=8&page=' + that.data.meishipage + '&pageRows=' + pageRows + '&sortType=time',
       method: 'GET',
       success: function(res) {
         if (res.statusCode == 200) {
@@ -661,7 +661,7 @@ Page({
       var that = this;
       var pageRows = 10;
       wx.request({
-        url: 'http://shg.yuf2.cn/shg-api/api/product/other/list?tagId=8&page=' + (++that.data.meishipage) + '&pageRows=' + pageRows + '&sortType=time',
+        url: app.globalData.taobaogoodurl + 'tagId=8&page=' + (++that.data.meishipage) + '&pageRows=' + pageRows + '&sortType=time',
         method: 'GET',
         success: function(res) {
           if (res.statusCode == 200) {
@@ -685,7 +685,7 @@ Page({
     });
     var pageRows = 10;
     wx.request({
-      url: 'http://shg.yuf2.cn/shg-api/api/product/other/list?tagId=8&page=1&pageRows=' + pageRows + '&sortType=time',
+      url: app.globalData.taobaogoodurl + 'tagId=8&page=1&pageRows=' + pageRows + '&sortType=time',
       method: 'GET',
       success: function(res) {
         if (res.statusCode == 200) {
@@ -705,7 +705,7 @@ Page({
     var that = this;
     var pageRows = 10;
     wx.request({
-      url: 'http://shg.yuf2.cn/shg-api/api/product/other/list?tagId=6&page=' + that.data.jujiapage + '&pageRows=' + pageRows + '&sortType=time',
+      url: app.globalData.taobaogoodurl + 'tagId=6&page=' + that.data.jujiapage + '&pageRows=' + pageRows + '&sortType=time',
       method: 'GET',
       success: function(res) {
         if (res.statusCode == 200) {
@@ -726,7 +726,7 @@ Page({
       var that = this;
       var pageRows = 10;
       wx.request({
-        url: 'http://shg.yuf2.cn/shg-api/api/product/other/list?tagId=6&page=' + (++that.data.jujiapage) + '&pageRows=' + pageRows + '&sortType=time',
+        url: app.globalData.taobaogoodurl + 'tagId=6&page=' + (++that.data.jujiapage) + '&pageRows=' + pageRows + '&sortType=time',
         method: 'GET',
         success: function(res) {
           if (res.statusCode == 200) {
@@ -750,7 +750,7 @@ Page({
     });
     var pageRows = 10;
     wx.request({
-      url: 'http://shg.yuf2.cn/shg-api/api/product/other/list?tagId=6&page=1&pageRows=' + pageRows + '&sortType=time',
+      url: app.globalData.taobaogoodurl + 'tagId=6&page=1&pageRows=' + pageRows + '&sortType=time',
       method: 'GET',
       success: function(res) {
         if (res.statusCode == 200) {
@@ -770,7 +770,7 @@ Page({
     var that = this;
     var pageRows = 10;
     wx.request({
-      url: 'http://shg.yuf2.cn/shg-api/api/product/other/list?tagId=7&page=' + that.data.xiebaopage + '&pageRows=' + pageRows + '&sortType=time',
+      url: app.globalData.taobaogoodurl + 'tagId=7&page=' + that.data.xiebaopage + '&pageRows=' + pageRows + '&sortType=time',
       method: 'GET',
       success: function(res) {
         if (res.statusCode == 200) {
@@ -791,7 +791,7 @@ Page({
       var that = this;
       var pageRows = 10;
       wx.request({
-        url: 'http://shg.yuf2.cn/shg-api/api/product/other/list?tagId=7&page=' + (++that.data.xiebaopage) + '&pageRows=' + pageRows + '&sortType=time',
+        url: app.globalData.taobaogoodurl + 'tagId=7&page=' + (++that.data.xiebaopage) + '&pageRows=' + pageRows + '&sortType=time',
         method: 'GET',
         success: function(res) {
           if (res.statusCode == 200) {
@@ -815,7 +815,7 @@ Page({
     });
     var pageRows = 10;
     wx.request({
-      url: 'http://shg.yuf2.cn/shg-api/api/product/other/list?tagId=7&page=1&pageRows=' + pageRows + '&sortType=time',
+      url: app.globalData.taobaogoodurl + 'tagId=7&page=1&pageRows=' + pageRows + '&sortType=time',
       method: 'GET',
       success: function(res) {
         if (res.statusCode == 200) {
@@ -925,7 +925,7 @@ Page({
       })
     }
   },
-  onclicksuperSearch:function(){
+  onclicksuperSearch: function() {
     var that = this;
     //let localStorageValue = [];
     if (this.data.inputValue.trim() != '') {

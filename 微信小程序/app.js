@@ -34,6 +34,8 @@ App({
     })
   },
   globalData: {
-    userInfo: null
+    userInfo: null,
+    pinduoduogoodurl:'http://192.168.0.3:8080/api/product/pdd/list',
+    taobaogoodurl:'http://shg.yuf2.cn/shg-api/api/product/other/list?'
   }
 })

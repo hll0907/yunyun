@@ -28,15 +28,24 @@ Page({
     })
   },
   onLoad: function (options) {
-    console.log(options)
+    var productIds = options.productId;
+    var str= decodeURIComponent((options.item))
+    console.log(JSON.parse(str))
+    var item = JSON.parse(str);
+    var couponurls = item.couponUrl;
+    // console.log(couponurls)
+    if (couponurls == null || couponurls == undefined || couponurls==''){
+      couponurls ='couponurls';
+    }
     var that = this;
     that.setData({
-      detail: options,
-      // productIds: res.data.result.productId,
-      // couponUrls: res.data.result.couponUrl,
-      // shopname: res.data.result.title,
-      // logoUrls: res.data.result.mainPic
+      detail: item,
+      couponUrls: couponurls,
+      productIds: item.productId,
+      shopname: item.title,
+      logoUrls: item.mainPic
     });
+    console.log(couponurls)
     wx.request({
       url: 'http://shg.yuf2.cn:8080/shg-api/api/product/images?productId=' + productIds,
       method: 'GET',
@@ -48,6 +57,7 @@ Page({
             imagesdata: res.data.result.images,
             detailImagesdata: res.data.result.detailImages,
           });
+          console.log(that.data.imagesdata.length)
         }
       }
     })
@@ -61,74 +71,6 @@ Page({
       content: '1、购买下单付款在淘宝，产品问题请咨询淘宝商家\r\n 2、付款后，请到个人中心提交订单，提交订单成功并确认收货，等待系统奖励积分\r\n 3、付款时请勿使用红包支付，使用红包支付会导致订单提交不成功，积分无法奖励\r\n 4、通过系统直接下单，请勿使用其他平台或商家给你的连接下单，会导致无法获得积分奖励\r\n 5、系统提示的奖励是购买一件的积分奖励，多买多奖\r\n',
     })
   },
-  onclickaddLike: function (e) {
-    var that = this;
-    var productId = that.data.productIds;
-    // console.log(productId);
-    // console.log(that.data.userId);
-    wx.request({
-      url: 'http://shg.yuf2.cn:8080/shg-api/api/product/collect?userId=' + that.data.userId + '&productId=' + productId,
-      method: 'POST',
-      success: function (res) {
-        if (res.statusCode == 200) {
-          that.setData({
-            islike: true,
-          })
-          wx.showToast({
-            title: res.data.message,
-            icon: 'succes',
-            duration: 2000,
-            mask: true
-          })
-          // console.log(res.data)
-        } else {
-          that.setData({
-            islike: false,
-          })
-          wx.showToast({
-            title: res.data.message,
-            icon: 'loading',
-            duration: 2000,
-            mask: true
-          })
-        }
-      },
-    })
-  },
-  onclickdelLike: function (e) {
-    var that = this;
-    var productId = that.data.productIds;
-    // console.log(productId);
-    wx.request({
-      url: 'http://shg.yuf2.cn:8080/shg-api/api/product/uncollect?userId=' + that.data.userId + '&productIds=' + productId,
-      method: 'POST',
-      success: function (res) {
-        if (res.statusCode == 200) {
-          that.setData({
-            islike: false,
-          })
-          wx.showToast({
-            title: res.data.message,
-            icon: 'succes',
-            duration: 2000,
-            mask: true
-          })
-          // console.log(res.data)
-        } else {
-          that.setData({
-            islike: true,
-          })
-          wx.showToast({
-            title: res.data.message,
-            icon: 'loading',
-            duration: 2000,
-            mask: true
-          })
-          // console.log(res.data)
-        }
-      },
-    })
-  },
   onclickBuy: function (e) {
     var that = this;
     that.onclickconvert_url();
@@ -139,7 +81,8 @@ Page({
     var that = this;
     var couponUrl = that.data.couponUrls;
     var productId = that.data.productIds;
-    // console.log(couponUrl);
+    console.log(couponUrl);
+    console.log(productId);
     wx.request({
       url: 'http://shg.yuf2.cn:8080/shg-api/api/product/convert_url?productId=' + productId + '&couponUrl=' + couponUrl,
       method: 'POST',

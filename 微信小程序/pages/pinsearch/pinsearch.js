@@ -115,7 +115,7 @@ Page({
     // console.log(productId);
     // console.log(that.data.banner)
     wx.navigateTo({
-      url: '../pagedetail/pagedetail?productId=' + productId
+      url: '../pinpagedetail/pinpagedetail?productId=' + productId
     });
     // console.log(productId)
   },
@@ -124,8 +124,14 @@ Page({
     var that = this;
     //请求搜索
     wx.request({
-      url: app.globalData.taobaogoodurl+'keyword=' + that.data.inputValue.trim() + '&page=1&pageRows=10&sortType=time',
-      data: {},
+      url: app.globalData.pinduoduogoodurl,
+      data: {
+        keyword: that.data.inputValue.trim(),
+        page: 1,
+        pageSize: 10,
+        sortType: 0,
+        withCoupon: false
+      },
       header: {},
       method: 'GET',
       dataType: '',
@@ -148,7 +154,15 @@ Page({
       var that = this;
       var pageRows = 10;
       wx.request({
-        url: app.globalData.taobaogoodurl +'keyword=' + that.data.inputValue.trim() + '&page=' + (++that.data.zhinengtuijianpage) + '&pageRows=' + pageRows + '&sortType=time',
+        url: app.globalData.pinduoduogoodurl,
+        data: {
+          keyword: that.data.inputValue.trim(),
+          page: ++that.data.zhinengtuijianpage,
+          pageSize: 10,
+          sortType: 0,
+          withCoupon: false
+        },
+        header: {},
         method: 'GET',
         success: function(res) {
           // console.log(res.data);
@@ -173,9 +187,16 @@ Page({
     that.setData({
       hasRefesh: true,
     });
-    var pageRows = 10;
     wx.request({
-      url: app.globalData.taobaogoodurl +'keyword=' + that.data.inputValue.trim() + '&page=1&pageRows=' + pageRows + '&sortType=time',
+      url: app.globalData.pinduoduogoodurl,
+      data: {
+        keyword: that.data.inputValue.trim(),
+        page: 1,
+        pageSize: 10,
+        sortType: 0,
+        withCoupon: false
+      },
+      header: {},
       method: 'GET',
       success: function(res) {
         // console.log(res.data);
@@ -200,12 +221,13 @@ Page({
   jianglizuigaosearch: function(e) {
     var that = this;
     wx.request({
-      url: app.globalData.taobaogoodurl,
+      url: app.globalData.pinduoduogoodurl,
       data: {
         keyword: that.data.inputValue.trim(),
         page: 1,
-        pageRows: 10,
-        sortType: 'reward'
+        pageSize: 10,
+        sortType: 2,
+        withCoupon: false
       },
       header: {},
       method: 'GET',
@@ -227,14 +249,14 @@ Page({
     setTimeout(() => {
       // console.log('加载更多')
       var that = this;
-      var pageRows = 10;
       wx.request({
-        url: app.globalData.taobaogoodurl,
+        url: app.globalData.pinduoduogoodurl,
         data: {
           keyword: that.data.inputValue.trim(),
           page: ++that.data.jianglizuigaopage,
-          pageRows: 10,
-          sortType: 'reward'
+          pageSize: 10,
+          sortType: 2,
+          withCoupon: false
         },
         header: {},
         method: 'GET',
@@ -264,14 +286,14 @@ Page({
     that.setData({
       hasRefesh: true,
     });
-    var pageRows = 10;
     wx.request({
-      url: app.globalData.taobaogoodurl,
+      url: app.globalData.pinduoduogoodurl,
       data: {
         keyword: that.data.inputValue.trim(),
         page: 1,
-        pageRows: 10,
-        sortType: 'reward'
+        pageSize: 10,
+        sortType: 2,
+        withCoupon: false
       },
       header: {},
       method: 'GET',
@@ -293,12 +315,13 @@ Page({
   youhuizuidasearch: function(e) {
     var that = this;
     wx.request({
-      url: app.globalData.taobaogoodurl,
+      url: app.globalData.pinduoduogoodurl,
       data: {
         keyword: that.data.inputValue.trim(),
         page: 1,
-        pageRows: 10,
-        sortType: 'coupon'
+        pageSize: 10,
+        sortType: 8,
+        withCoupon: false
       },
       header: {},
       method: 'GET',
@@ -322,12 +345,13 @@ Page({
       var that = this;
       var pageRows = 10;
       wx.request({
-        url: app.globalData.taobaogoodurl,
+        url: app.globalData.pinduoduogoodurl,
         data: {
           keyword: that.data.inputValue.trim(),
           page: ++that.data.youhuizuidapage,
-          pageRows: 10,
-          sortType: 'coupon'
+          pageSize: 10,
+          sortType: 8,
+          withCoupon: false
         },
         header: {},
         method: 'GET',
@@ -359,12 +383,13 @@ Page({
     });
     var pageRows = 10;
     wx.request({
-      url: app.globalData.taobaogoodurl,
+      url: app.globalData.pinduoduogoodurl,
       data: {
         keyword: that.data.inputValue.trim(),
         page: 1,
-        pageRows: 10,
-        sortType: 'coupon'
+        pageSize: 10,
+        sortType: 8,
+        withCoupon: false
       },
       header: {},
       method: 'GET',
@@ -386,12 +411,13 @@ Page({
   xiaoliangzuigaosearch: function(e) {
     var that = this;
     wx.request({
-      url: app.globalData.taobaogoodurl,
+      url: app.globalData.pinduoduogoodurl,
       data: {
         keyword: that.data.inputValue.trim(),
         page: 1,
-        pageRows: 10,
-        sortType: 'sale'
+        pageSize: 10,
+        sortType: 6,
+        withCoupon: false
       },
       header: {},
       method: 'GET',
@@ -413,14 +439,14 @@ Page({
     setTimeout(() => {
       // console.log('加载更多')
       var that = this;
-      var pageRows = 10;
       wx.request({
-        url: app.globalData.taobaogoodurl,
+        url: app.globalData.pinduoduogoodurl,
         data: {
           keyword: that.data.inputValue.trim(),
           page: ++that.data.xiaoliangzuigaopage,
-          pageRows: 10,
-          sortType: 'sale'
+          pageSize: 10,
+          sortType: 6,
+          withCoupon: false
         },
         header: {},
         method: 'GET',
@@ -450,14 +476,14 @@ Page({
     that.setData({
       hasRefesh: true,
     });
-    var pageRows = 10;
     wx.request({
-      url: app.globalData.taobaogoodurl,
+      url: app.globalData.pinduoduogoodurl,
       data: {
         keyword: that.data.inputValue.trim(),
         page: 1,
-        pageRows: 10,
-        sortType: 'sale'
+        pageSize: 10,
+        sortType: 6,
+        withCoupon: false
       },
       header: {},
       method: 'GET',

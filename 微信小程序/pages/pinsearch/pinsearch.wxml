@@ -2,20 +2,19 @@
   <view class='fontright'>
     <input class="search-input" placeholder="请输入搜索的商品名" focus bindinput="bindInput" value="{{inputValue}}" />
     <icon type="clear" size="20" bindtap="clearInput" />
-    <button style="display:inline-block;font-size:24rpx;background:red;color:#ffffff;width:30%;" bindtap="setSearchStorage">超级搜</button>
+    <button style="display:inline-block;font-size:24rpx;background:red;color:#ffffff;width:30%;" bindtap="setSearchStorage">搜索</button>
   </view>
 </view>
 <view style='height:10px;background:#f1f1f1'></view>
 <view class="swiper-tab">
-  <view class="swiper-tab-list {{currentTab==0 ? 'on' : ''}}" data-current="0" bindtap="swichNav">综合排序</view>
-  <view class="swiper-tab-list {{currentTab==1 ? 'on' : ''}}" data-current="1" bindtap="swichNav">销量最高</view>
-  <view class="swiper-tab-list {{currentTab==2 ? 'on' : ''}}" data-current="2" bindtap="swichNav">仅看有券</view>
-  <view class="swiper-tab-list {{currentTab==3 ? 'on' : ''}}" data-current="3" bindtap="swichNav">海外商品</view>
-  <view class="swiper-tab-list {{currentTab==4 ? 'on' : ''}}" data-current="4" bindtap="swichNav">天猫优先</view>
+  <view class="swiper-tab-list {{currentTab==0 ? 'on' : ''}}" data-current="0" bindtap="swichNav">智能推荐</view>
+  <view class="swiper-tab-list {{currentTab==1 ? 'on' : ''}}" data-current="1" bindtap="swichNav">奖励最高</view>
+  <view class="swiper-tab-list {{currentTab==2 ? 'on' : ''}}" data-current="2" bindtap="swichNav">优惠最大</view>
+  <view class="swiper-tab-list {{currentTab==3 ? 'on' : ''}}" data-current="3" bindtap="swichNav">销量最高</view>
 </view>
 <swiper current="{{currentTab}}" class="swiper-box" duration="300" style="height:{{winHeight - 31}}px" bindchange="bindChange">
   <swiper-item>
-    <!-- 综合排序 -->
+    <!-- 智能推荐 -->
     <loading hidden="{{hidden}}" bindchange="loadingChange">
       加载中...
     </loading>
@@ -25,7 +24,7 @@
         <text>刷新中...</text>
       </view>
       <view wx:if="{{zhinengtuijiandata.length !=0}}">
-        <view wx:for="{{zhinengtuijiandata}}" wx:for-item="item" wx:key="zhinengtuijiandata" bindtap="bindViewTap" data-item='{{item}}' data-id='{{item.productId}}' class='fontright'>
+        <view wx:for="{{zhinengtuijiandata}}" wx:for-item="item" wx:key="zhinengtuijiandata" data-title="{{item.title}}" bindtap="bindViewTap" data-id='{{item.productId}}' class='fontright'>
           <view style='width:40%;'>
             <view style='text-align:center;'>
               <image class='goodimg' src="{{item.mainPic}}"></image>
@@ -48,7 +47,89 @@
         </view>
         <view class="weui-loadmore" hidden="{{isHideLoadMore}}">
           <view class="weui-loading"></view>
-          <view class="weui-loadmore__tips">商品加载完成</view>
+          <view class="weui-loadmore__tips">商品加载完成....</view>
+        </view>
+      </view>
+      <view wx:else style='text-align:center'>暂无商品</view>
+      <view style="height:15px;"></view>
+    </scroll-view>
+  </swiper-item>
+  <swiper-item>
+    <!-- 奖励最高 -->
+    <loading hidden="{{hidden}}" bindchange="loadingChange">
+      加载中...
+    </loading>
+    <scroll-view scroll-y='true' style="height: {{winHeight?winHeight+'px':'auto'}}" bindscrolltolower="jianglizuigaoloadMore" bindscrolltoupper="jianglizuigaorefesh">
+      <view wx:if="{{hasRefesh}}" class='goodrefesh'>
+        <icon type="waiting" size="25" />
+        <text>刷新中...</text>
+      </view>
+      <view wx:if="{{jianglizuigaodata.length !=0}}">
+        <view wx:for="{{jianglizuigaodata}}" wx:for-item="item" wx:key="jianglizuigaodata" data-title="{{item.title}}" bindtap="bindViewTap" data-id='{{item.productId}}' class='fontright'>
+          <view style='width:40%;'>
+            <view style='text-align:center;'>
+              <image class='goodimg' src="{{item.mainPic}}"></image>
+            </view>
+          </view>
+          <view style='width:60%;'>
+            <view style="margin:10rpx;font-size:30rpx">
+              <text class='goodsource'>{{item.source}}</text> {{item.title}}
+            </view>
+            <view>
+              <text class='goodcoupon' wx:if="{{item.couponPrice !=0}}">{{item.couponPrice}}元优惠券 </text>
+              <text class='goodintegral'>约奖{{item.integral}}积分</text>
+            </view>
+            <view>
+              <text class='goodprice'>￥{{item.price}} </text>
+              <text class='goodoriginprice' wx:if="{{item.couponPrice !=0}}">原价:<text style='text-decoration:line-through;'>￥{{item.originPrice}}</text></text>
+              <text class='goodsale'>已售{{item.salesNum}}件</text>
+            </view>
+          </view>
+        </view>
+        <view class="weui-loadmore" hidden="{{isHideLoadMore}}">
+          <view class="weui-loading"></view>
+          <view class="weui-loadmore__tips">商品加载完成....</view>
+        </view>
+      </view>
+      <view wx:else style='text-align:center'>暂无商品</view>
+      <view style="height:15px;"></view>
+    </scroll-view>
+  </swiper-item>
+  <swiper-item>
+    <!-- 优惠最大 -->
+    <loading hidden="{{hidden}}" bindchange="loadingChange">
+      加载中...
+    </loading>
+    <scroll-view scroll-y='true' style="height: {{winHeight?winHeight+'px':'auto'}}" bindscrolltolower="youhuizuidaloadMore" bindscrolltoupper="youhuizuidarefesh">
+      <view wx:if="{{hasRefesh}}" class='goodrefesh'>
+        <icon type="waiting" size="25" />
+        <text>刷新中...</text>
+      </view>
+      <view wx:if="{{youhuizuidadata.length !=0}}">
+        <view wx:for="{{youhuizuidadata}}" wx:for-item="item" wx:key="youhuizuidadata" data-title="{{item.title}}" bindtap="bindViewTap" data-id='{{item.productId}}' class='fontright'>
+          <view style='width:40%;'>
+            <view style='text-align:center;'>
+              <image class='goodimg' src="{{item.mainPic}}"></image>
+            </view>
+          </view>
+          <view style='width:60%;'>
+            <view style="margin:10rpx;font-size:30rpx">
+              <text class='goodsource'>{{item.source}}</text> {{item.title}}
+            </view>
+            <view>
+              <text class='goodcoupon' wx:if="{{item.couponPrice !=0}}">{{item.couponPrice}}元优惠券 </text>
+              <text class='goodintegral'>约奖{{item.integral}}积分</text>
+            </view>
+            <view>
+              <text class='goodprice'>￥{{item.price}} </text>
+              <text class='goodoriginprice' wx:if="{{item.couponPrice !=0}}">原价:<text style='text-decoration:line-through;'>￥{{item.originPrice}}</text></text>
+              <text class='goodsale'>已售{{item.salesNum}}件</text>
+            </view>
+          </view>
+        </view>
+        <view class="weui-loadmore" hidden="{{isHideLoadMore}}">
+          <view class="weui-loading"></view>
+          <view class="weui-loadmore__tips">商品加载完成....</view>
         </view>
       </view>
       <view wx:else style='text-align:center'>暂无商品</view>
@@ -60,95 +141,13 @@
     <loading hidden="{{hidden}}" bindchange="loadingChange">
       加载中...
     </loading>
-    <scroll-view scroll-y='true' style="height: {{winHeight?winHeight+'px':'auto'}}" bindscrolltolower="jianglizuigaoloadMore" bindscrolltoupper="jianglizuigaorefesh">
-      <view wx:if="{{hasRefesh}}" class='goodrefesh'>
-        <icon type="waiting" size="25" />
-        <text>刷新中...</text>
-      </view>
-      <view wx:if="{{jianglizuigaodata.length !=0}}">
-        <view wx:for="{{jianglizuigaodata}}" wx:for-item="item" wx:key="jianglizuigaodata" bindtap="bindViewTap" data-item='{{item}}' data-id='{{item.productId}}' class='fontright'>
-          <view style='width:40%;'>
-            <view style='text-align:center;'>
-              <image class='goodimg' src="{{item.mainPic}}"></image>
-            </view>
-          </view>
-          <view style='width:60%;'>
-            <view style="margin:10rpx;font-size:30rpx">
-              <text class='goodsource'>{{item.source}}</text> {{item.title}}
-            </view>
-            <view>
-              <text class='goodcoupon' wx:if="{{item.couponPrice !=0}}">{{item.couponPrice}}元优惠券 </text>
-              <text class='goodintegral'>约奖{{item.integral}}积分</text>
-            </view>
-            <view>
-              <text class='goodprice'>￥{{item.price}} </text>
-              <text class='goodoriginprice' wx:if="{{item.couponPrice !=0}}">原价:<text style='text-decoration:line-through;'>￥{{item.originPrice}}</text></text>
-              <text class='goodsale'>已售{{item.salesNum}}件</text>
-            </view>
-          </view>
-        </view>
-        <view class="weui-loadmore" hidden="{{isHideLoadMore}}">
-          <view class="weui-loading"></view>
-          <view class="weui-loadmore__tips">商品加载完成</view>
-        </view>
-      </view>
-      <view wx:else style='text-align:center'>暂无商品</view>
-      <view style="height:15px;"></view>
-    </scroll-view>
-  </swiper-item>
-  <swiper-item>
-    <!-- 仅看有券 -->
-    <loading hidden="{{hidden}}" bindchange="loadingChange">
-      加载中...
-    </loading>
-    <scroll-view scroll-y='true' style="height: {{winHeight?winHeight+'px':'auto'}}" bindscrolltolower="youhuizuidaloadMore" bindscrolltoupper="youhuizuidarefesh">
-      <view wx:if="{{hasRefesh}}" class='goodrefesh'>
-        <icon type="waiting" size="25" />
-        <text>刷新中...</text>
-      </view>
-      <view wx:if="{{youhuizuidadata.length !=0}}">
-        <view wx:for="{{youhuizuidadata}}" wx:for-item="item" wx:key="youhuizuidadata" bindtap="bindViewTap" data-item='{{item}}' data-id='{{item.productId}}' class='fontright'>
-          <view style='width:40%;'>
-            <view style='text-align:center;'>
-              <image class='goodimg' src="{{item.mainPic}}"></image>
-            </view>
-          </view>
-          <view style='width:60%;'>
-            <view style="margin:10rpx;font-size:30rpx">
-              <text class='goodsource'>{{item.source}}</text> {{item.title}}
-            </view>
-            <view>
-              <text class='goodcoupon' wx:if="{{item.couponPrice !=0}}">{{item.couponPrice}}元优惠券 </text>
-              <text class='goodintegral'>约奖{{item.integral}}积分</text>
-            </view>
-            <view>
-              <text class='goodprice'>￥{{item.price}} </text>
-              <text class='goodoriginprice' wx:if="{{item.couponPrice !=0}}">原价:<text style='text-decoration:line-through;'>￥{{item.originPrice}}</text></text>
-              <text class='goodsale'>已售{{item.salesNum}}件</text>
-            </view>
-          </view>
-        </view>
-        <view class="weui-loadmore" hidden="{{isHideLoadMore}}">
-          <view class="weui-loading"></view>
-          <view class="weui-loadmore__tips">商品加载完成</view>
-        </view>
-      </view>
-      <view wx:else style='text-align:center'>暂无商品</view>
-      <view style="height:15px;"></view>
-    </scroll-view>
-  </swiper-item>
-  <swiper-item>
-    <!-- 海外商品 -->
-    <loading hidden="{{hidden}}" bindchange="loadingChange">
-      加载中...
-    </loading>
     <scroll-view scroll-y='true' style="height: {{winHeight?winHeight+'px':'auto'}}" bindscrolltolower="xiaoliangzuigaoloadMore" bindscrolltoupper="xiaoliangzuigaorefesh">
       <view wx:if="{{hasRefesh}}" class='goodrefesh'>
         <icon type="waiting" size="25" />
         <text>刷新中...</text>
       </view>
       <view wx:if="{{xiaoliangzuigaodata.length !=0}}">
-        <view wx:for="{{xiaoliangzuigaodata}}" wx:for-item="item" wx:key="xiaoliangzuigaodata" bindtap="bindViewTap" data-item='{{item}}' data-id='{{item.productId}}' class='fontright'>
+        <view wx:for="{{xiaoliangzuigaodata}}" wx:for-item="item" wx:key="xiaoliangzuigaodata" data-title="{{item.title}}" bindtap="bindViewTap" data-id='{{item.productId}}' class='fontright'>
           <view style='width:40%;'>
             <view style='text-align:center;'>
               <image class='goodimg' src="{{item.mainPic}}"></image>
@@ -170,50 +169,8 @@
           </view>
         </view>
         <view class="weui-loadmore" hidden="{{isHideLoadMore}}">
-          <view class="weui-loading"></view>
-          <view class="weui-loadmore__tips">商品加载完成</view>
-          <!-- <view wx:else class="weui-loadmore__tips">{{isHideLoadMore}}正在加载中...</view> -->
-        </view>
-      </view>
-      <view wx:else style='text-align:center'>暂无商品</view>
-      <view style="height:15px;"></view>
-    </scroll-view>
-  </swiper-item>
-  <swiper-item>
-    <!-- 天猫优先 -->
-    <loading hidden="{{hidden}}" bindchange="loadingChange">
-      加载中...
-    </loading>
-    <scroll-view scroll-y='true' style="height: {{winHeight?winHeight+'px':'auto'}}" bindscrolltolower="tianmaoloadMore" bindscrolltoupper="tianmaorefesh">
-      <view wx:if="{{hasRefesh}}" class='goodrefesh'>
-        <icon type="waiting" size="25" />
-        <text>刷新中...</text>
-      </view>
-      <view wx:if="{{tianmaodata.length !=0}}">
-        <view wx:for="{{tianmaodata}}" wx:for-item="item" wx:key="tianmaodata" bindtap="bindViewTap" data-item='{{item}}' data-id='{{item.productId}}' class='fontright'>
-          <view style='width:40%;'>
-            <view style='text-align:center;'>
-              <image class='goodimg' src="{{item.mainPic}}"></image>
-            </view>
-          </view>
-          <view style='width:60%;'>
-            <view style="margin:10rpx;font-size:30rpx">
-              <text class='goodsource'>{{item.source}}</text> {{item.title}}
-            </view>
-            <view>
-              <text class='goodcoupon' wx:if="{{item.couponPrice !=0}}">{{item.couponPrice}}元优惠券 </text>
-              <text class='goodintegral'>约奖{{item.integral}}积分</text>
-            </view>
-            <view>
-              <text class='goodprice'>￥{{item.price}} </text>
-              <text class='goodoriginprice' wx:if="{{item.couponPrice !=0}}">原价:<text style='text-decoration:line-through;'>￥{{item.originPrice}}</text></text>
-              <text class='goodsale'>已售{{item.salesNum}}件</text>
-            </view>
-          </view>
-        </view>
-        <view class="weui-loadmore" hidden="{{isHideLoadMore}}">
-          <view class="weui-loading"></view>
-          <view class="weui-loadmore__tips">商品加载完成</view>
+          <view  class="weui-loading"></view>
+          <view  class="weui-loadmore__tips">商品加载完成....</view>
           <!-- <view wx:else class="weui-loadmore__tips">{{isHideLoadMore}}正在加载中...</view> -->
         </view>
       </view>

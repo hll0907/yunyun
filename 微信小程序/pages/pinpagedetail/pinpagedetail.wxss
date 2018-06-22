@@ -1,0 +1,122 @@
+.swiper-container {
+  position: relative;
+}
+
+.swiper-container .swiper {
+  height: 400px;
+}
+
+.swiper-container .swiper .img {
+  width: 100%;
+  height: 100%;
+}
+
+.swiper-container .dots {
+  position: absolute;
+  right: 40rpx;
+  bottom: 20rpx;
+  display: flex;
+  justify-content: center;
+}
+
+.swiper-container .dots .dot {
+  margin: 0 10rpx;
+  width: 28rpx;
+  height: 28rpx;
+  background: #fff;
+  border-radius: 50%;
+  transition: all 0.6s;
+  font: 300 18rpx/28rpx "microsoft yahei";
+  text-align: center;
+}
+
+.swiper-container .dots .dot.active {
+  background: #f80;
+  color: #fff;
+}
+
+.goodsource {
+  margin: 5px;
+  color: #fff;
+  font-size: 14px;
+  background: #f80;
+}
+
+.goodcoupon {
+  color: #fff;
+  font-size: 14px;
+  margin-left: 10rpx;
+  border: 1px solid red;
+  background: red;
+}
+
+.goodintegral {
+  color: #f80;
+  margin-left: 10rpx;
+}
+
+.goodprice {
+  color: red;
+  font-size: 18px;
+  margin-left: 10rpx;
+}
+
+.goodoriginprice {
+  color: #999;
+  font-size: 14px;
+  margin-left: 20rpx;
+}
+
+.goodsale {
+  color: #999;
+  font-size: 16px;
+  margin-left: 30rpx;
+}
+
+.goodcoupondetail {
+  color: #999;
+  font-size: 12px;
+  margin-left: 5px;
+}
+
+.fontright {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.detail-nav {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  float: left;
+  background-color: #fff;
+  position: fixed;
+  bottom: 0;
+  right: 0;
+  z-index: 1;
+  width: 100%;
+  height: 100rpx;
+}
+
+.button-green {
+  background-color: #4caf50; /* Green */
+  font-size: 20rpx;
+  margin-left: 20rpx;
+}
+
+.button-red {
+  background-color: #f44336; /* 红色 */
+  font-size: 20rpx;
+  margin-left: 5rpx;
+}
+.buttonpink{
+  background-color: pink; /* 粉红色 */
+  font-size: 20rpx;
+  margin-left: 5rpx;
+}
+.detail-nav-color {
+  color: red;
+  font-size: 20rpx;
+}

@@ -17,12 +17,12 @@ Page({
     jianglizuigaodata: [],
     youhuizuidadata: [],
     xiaoliangzuigaodata: [],
-    tianmaodata:[],
+    tianmaodata: [],
     zhinengtuijianpage: 1,
     jianglizuigaopage: 1,
     youhuizuidapage: 1,
     xiaoliangzuigaopage: 1,
-    tianmaopage:1
+    tianmaopage: 1
   },
   //获取输入框的输入信息
   bindInput: function(e) {
@@ -120,11 +120,12 @@ Page({
   //点击跳转到商品详情
   bindViewTap: function(e) {
     var productId = e.currentTarget.dataset.id;
-    var title = e.currentTarget.dataset
-    console.log(title);
-    // console.log(that.data.banner)
+    // var title = e.currentTarget.dataset.title;
+    let str = JSON.stringify(e.currentTarget.dataset.item);
+    let item = encodeURIComponent(str)
+    console.log(item)
     wx.navigateTo({
-      url: '../superpagedetail/superpagedetail?productId=' + productId +"&title="
+      url: '../superpagedetail/superpagedetail?productId=' + productId + "&item=" + item
     });
     // console.log(productId)
   },
@@ -320,7 +321,7 @@ Page({
         pageSize: 10,
         sort: 'tk_rate_des',
         q: that.data.inputValue.trim(),
-        isCoupon:true
+        isCoupon: true
       },
       header: {},
       method: 'GET',
@@ -499,7 +500,7 @@ Page({
     })
   },
   //天猫优先
-  tianmaosearch: function (e) {
+  tianmaosearch: function(e) {
     var that = this;
     wx.request({
       url: 'http://shg.yuf2.cn/shg-api/api/product/super-search?platform=2',
@@ -513,20 +514,20 @@ Page({
       header: {},
       method: 'GET',
       dataType: '',
-      success: function (res) {
+      success: function(res) {
         // console.log(res)
         that.setData({
           tianmaodata: res.data.result,
           hidden: true
         })
       },
-      fail: function (res) {
+      fail: function(res) {
         console.log(res)
       },
     })
   },
   //天猫优先上拉加载更多
-  tianmaoloadMore: function (e) {
+  tianmaoloadMore: function(e) {
     setTimeout(() => {
       // console.log('加载更多')
       var that = this;
@@ -542,7 +543,7 @@ Page({
         header: {},
         method: 'GET',
         dataType: '',
-        success: function (res) {
+        success: function(res) {
           // console.log(res)
           if (res.statusCode == 200) {
             // console.log(res.data.result)
@@ -555,14 +556,14 @@ Page({
           }
           console.log(that.data.tianmaopage)
         },
-        fail: function (res) {
+        fail: function(res) {
           console.log(res)
         }
       })
     }, 1000)
   },
   //天猫优先下拉刷新
-  tianmaorefesh: function () {
+  tianmaorefesh: function() {
     var that = this;
     that.setData({
       hasRefesh: true,
@@ -579,7 +580,7 @@ Page({
       header: {},
       method: 'GET',
       dataType: '',
-      success: function (res) {
+      success: function(res) {
         if (res.statusCode == 200) {
           var PIC = res.data.result;
           that.setData({

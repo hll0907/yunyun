@@ -1,19 +1,21 @@
 {
   "pages": [
     "pages/index/index",
-    "pages/search/search",
-    "pages/supersearch/supersearch",
     "pages/pin/pin",
+    "pages/search/search",
+    "pages/pinsearch/pinsearch",
+    "pages/supersearch/supersearch",
     "pages/collection/collection",
     "pages/my/my",
     "pages/newview/newview",
     "pages/pagedetail/pagedetail",
+    "pages/pinpagedetail/pinpagedetail",        
     "pages/superpagedetail/superpagedetail"
   ],
   "window": {
     "backgroundTextStyle": "light",
     "navigationBarBackgroundColor": "#fff",
-    "navigationBarTitleText": "首页",
+    "navigationBarTitleText": "淘宝首页",
     "navigationBarTextStyle": "black"
   },
   "networkTimeout": {
