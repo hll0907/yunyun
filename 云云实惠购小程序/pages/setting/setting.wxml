@@ -1,0 +1,38 @@
+<view class="userinfo">
+  <text class='userinfo_text'>头像与昵称</text>
+</view>
+<view class='userinfo-border'></view>
+<view class="userinfos">
+  <image class="userinfo-avatar" src="{{userdata.imageUrl}}"></image>
+  <view class="userinfo-nickname">
+    {{userdata.nickName}}
+  </view>
+  <button class="userinfo-setting" bindtap='usersetting'>同步微信头像与昵称</button>
+</view>
+<view class='userinfo-border3'></view>
+<view class='userinfo-message fontright'>
+  <view>手机号</view>
+  <view wx:if="{{userdata.phone !=''}}" bindtap='showphone'>{{userdata.phone}}></view>
+  <view wx:else bindtap='bindphone'>去绑定></view>
+</view>
+<view class='userinfo-border2'></view>
+<view>
+  <view class='userinfo-message fontright' bindtap='showylh'>
+    <view>云联账号</view>
+    <view wx:if="{{userdata.ylhId !=''}}">{{userdata.ylhId}}></view>
+    <view wx:else>去绑定></view>
+  </view>
+</view>
+<view class='userinfo-border3'></view>
+<view class='userinfo-message fontright' bindtap='bindalipay'>
+  <view>支付宝收款码</view>
+  <view wx:if="{{userdata.alipay !=''}}">已添加></view>
+  <view wx:else>去添加></view>
+</view>
+<view class='userinfo-border2'></view>
+<view class='userinfo-message fontright' bindtap='bindweixin'>
+  <view>微信收款码</view>
+  <view wx:if="{{userdata.wxMoneyQrcode !=''}}">已添加></view>
+  <view wx:else>去添加></view>
+</view>
+<view class='userinfo-border3'></view>

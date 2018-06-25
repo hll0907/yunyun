@@ -1,0 +1,21 @@
+/* pages/friend/friend.wxss */
+.fontright {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+}
+.border{
+  border: 5rpx solid #f1f1f1;
+}
+.userinfo-avatar {
+  width: 150rpx;
+  height: 150rpx;
+  margin: 20rpx;
+  border-radius: 50%;
+}
+
+.userinfo-nickname {
+  margin-right: 200rpx;
+  font-size: 32rpx;
+}

@@ -1,0 +1,21 @@
+<!--pages/friends/friends.wxml-->
+<view style='font-size:36rpx;background:#fd72a9;text-align:center;'>
+  <view style='height:20rpx;'></view>
+  <text style='color:#fff;margin:25rpx;'>他的好友</text>
+  <view style='height:20rpx;'></view>
+</view>
+<view>
+  <view wx:if="{{frienddata.length !=0}}">
+    <scroll-view scroll-y='true' style="height: {{winHeight?winHeight+'px':'auto'}}" bindscrolltolower="friendloadMore">
+      <view wx:for="{{frienddata}}" wx:for-item="item" wx:key="frienddata">
+        <view class='fontright' style='margin:5rpx;'>
+          <image class="userinfo-avatar" src="{{item.imageUrl}}"></image>
+          <view class="userinfo-nickname">{{item.nickName}}</view>
+          <view></view>
+        </view>
+        <view class='border'></view>
+      </view>
+    </scroll-view>
+  </view>
+  <view wx:else style='text-align:center'>暂无好友</view>
+</view>

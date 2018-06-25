@@ -10,6 +10,7 @@ App({
     wx.login({
       success: res => {
         // 发送 res.code 到后台换取 openId, sessionKey, unionId
+        console.log(res)
       }
     })
     // 获取用户信息
@@ -21,7 +22,7 @@ App({
             success: res => {
               // 可以将 res 发送给后台解码出 unionId
               this.globalData.userInfo = res.userInfo
-
+              console.log(res.userInfo)
               // 由于 getUserInfo 是网络请求，可能会在 Page.onLoad 之后才返回
               // 所以此处加入 callback 以防止这种情况
               if (this.userInfoReadyCallback) {
@@ -36,6 +37,10 @@ App({
   globalData: {
     userInfo: null,
     pinduoduogoodurl:'http://192.168.0.3:8080/api/product/pdd/list',
-    taobaogoodurl:'http://shg.yuf2.cn/shg-api/api/product/other/list?'
+    taobaogoodurl:'https://shg.yuf2.cn/shg-api/api/product/other/list?',
+    taobaocollectionurl:'https://shg.yuf2.cn/shg-api/api/product/my_collect',
+    taobaodelcollectionurl:'https://shg.yuf2.cn/shg-api/api/product/uncollect',
+    userId: 790714,
+    dataurl:'https://shg.yuf2.cn/shg-api/api/'
   }
 })

@@ -1,3 +1,15 @@
-<view class="container">
- {{motto}}
+<view class="userinfo">
+  <image bindtap="bindViewTap" class="userinfo-avatar" src="{{userdata.imageUrl}}"></image>
+  <view class="userinfo-nickname">
+    {{userdata.nickName}}
+    <view style='font-size:24rpx;'>我的ID:{{userdata.userId}}</view>
+    <view style='font-size:24rpx;'>我的好友:{{userdata.invitedNum}}</view>
+  </view>
+  <view class="userinfo-setting">账户设置</view>
 </view>
+<view class='userinfo-info'></view>
+<view class='userinfo-intergal fontright'>
+  <view>可提现积分<view style='color:#999;font-size:24rpx;'>(点击去提现)</view></view>
+  <view>{{userdata.whiteIntegral}}></view>
+</view>
+<view class='userinfo-border'></view>

@@ -1,0 +1,77 @@
+.fontright {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.border {
+  border: 5rpx solid #f1f1f1;
+}
+
+.swiper-tab {
+  width: 100%;
+  border-bottom: 1rpx solid #777;
+  text-align: center;
+  line-height: 80rpx;
+}
+
+.swiper-tab-list {
+  font-size: 30rpx;
+  display: inline-block;
+  width: 25%;
+  color: #777;
+}
+
+.on {
+  color: red;
+  border-bottom: 2rpx solid red;
+}
+
+.swiper-box {
+  display: block;
+  height: 100%;
+  width: 100%;
+  overflow: hidden;
+}
+
+.swiper-box view {
+  font-size: 24rpx;
+}
+
+.goodimg {
+  width: 240rpx;
+  height: 240rpx;
+  margin: 5rpx;
+  border: 4px solid #ffe2d6;
+}
+
+.goodsource {
+  margin: 10rpx;
+  color: #fff;
+  font-size: 24rpx;
+  background: #f80;
+}
+
+.goodorder {
+  margin: 10rpx;
+  color: #999
+}
+
+.goodintegral {
+  color: red;
+  font-size: 30rpx;
+}
+
+.goodprice {
+  color: red;
+  font-size: 30rpx;
+  margin-left: 10rpx;
+}
+
+.fontright {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+}

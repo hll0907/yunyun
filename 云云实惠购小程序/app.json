@@ -1,0 +1,70 @@
+{
+  "pages": [
+    "pages/index/index",
+    "pages/friend/friend",
+    "pages/friends/friends",        
+    "pages/referee/referee",        
+    "pages/submitorder/submitorder",
+    "pages/customerService/customerService",
+    "pages/orderrecord/orderrecord",
+    "pages/integralrecord/integralrecord",
+    "pages/cashrecord/cashrecord",
+    "pages/withdraw/withdraw",
+    "pages/bindphone/bindphone",
+    "pages/bindylh/bindylh",
+    "pages/bindalipay/bindalipay",
+    "pages/bindweixin/bindweixin",
+    "pages/setting/setting",
+    "pages/my/my",
+    "pages/collection/collection",
+    "pages/pin/pin",
+    "pages/search/search",
+    "pages/pinsearch/pinsearch",
+    "pages/supersearch/supersearch",
+    "pages/newview/newview",
+    "pages/pagedetail/pagedetail",
+    "pages/pinpagedetail/pinpagedetail",
+    "pages/superpagedetail/superpagedetail"
+  ],
+  "window": {
+    "backgroundTextStyle": "light",
+    "navigationBarBackgroundColor": "#fff",
+    "navigationBarTitleText": "淘宝首页",
+    "navigationBarTextStyle": "black"
+  },
+  "networkTimeout": {
+    "request": 10000,
+    "downloadFile": 10000
+  },
+  "tabBar": {
+    "color": "#818181",
+    "selectedColor": "red",
+    "borderStyle": "white",
+    "list": [
+      {
+        "pagePath": "pages/index/index",
+        "text": "淘宝",
+        "iconPath": "pages/images/icon_taobao.png",
+        "selectedIconPath": "pages/images/icon_taobao_current.png"
+      },
+      {
+        "pagePath": "pages/pin/pin",
+        "text": "拼多多",
+        "iconPath": "pages/images/icon_pin.png",
+        "selectedIconPath": "pages/images/icon_pin_current.png"
+      },
+      {
+        "pagePath": "pages/collection/collection",
+        "text": "收藏",
+        "iconPath": "pages/images/icon_collection.png",
+        "selectedIconPath": "pages/images/icon_collection_current.png"
+      },
+      {
+        "pagePath": "pages/my/my",
+        "text": "我的",
+        "iconPath": "pages/images/icon_my.png",
+        "selectedIconPath": "pages/images/icon_my_current.png"
+      }
+    ]
+  }
+}

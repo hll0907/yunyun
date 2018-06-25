@@ -1,0 +1,20 @@
+<view style='font-size:32rpx;background:#fd72a9'>
+  <text style='color:#fff;margin:10rpx;'>请认真核对您的手机号哦</text>
+</view>
+<view>
+  <view class="section">
+    <text>手机号码</text>
+    <input placeholder="请输入手机号码" type="number" maxlength="11" bindinput="inputPhoneNum"  />
+    <text wx:if="{{send}}" class="sendMsg" bindtap="sendMsg">发送</text>
+    <text wx:if="{{alreadySend}}" class="sendMsg" bindtap="sendMsg">{{second+"s"}}</text>
+  </view>
+  <view class="section">
+    <text>短信验证</text>
+    <input placeholder="请输入短信验证码" type="number" bindinput="addCode" />
+  </view>
+  <view class="section">
+    <text>密\t\t\t\t码</text>
+    <input placeholder="请输入密码" bindinput="addOtherInfo" type='password' />
+  </view>
+  <button type="{{buttonType}}" disabled="{{disabled}}" bindtap="onSubmit">保存</button>
+</view>

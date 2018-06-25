@@ -1,0 +1,26 @@
+/* pages/referee/referee.wxss */
+.userinfo-avatar {
+  width: 150rpx;
+  height: 150rpx;
+  margin: 20rpx;
+  border-radius: 50%;
+}
+.fontright {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+}
+.userinfo-border2 {
+  height: 4rpx;
+  background: #f1f1f1;
+}
+.userinfo-border3 {
+  height: 10rpx;
+  background: #f1f1f1;
+}
+.userinfo-message{
+  color: #999;
+  font-size: 42rpx;
+  margin: 10rpx;
+}

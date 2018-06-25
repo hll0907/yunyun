@@ -1,0 +1,9 @@
+.fontright {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+}
+.border{
+  border: 5rpx solid #f1f1f1;
+}

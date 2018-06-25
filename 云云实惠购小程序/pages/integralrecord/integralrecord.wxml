@@ -1,0 +1,101 @@
+<view style='font-size:36rpx;background:#fd72a9;text-align:center;'>
+<view style='height:20rpx;'></view>
+  <text style='color:#fff;margin:25rpx;'>积分记录</text>
+  <view style='height:20rpx;'></view>
+</view>
+<view class="swiper-tab">
+  <view class="swiper-tab-list {{currentTab==0 ? 'on' : ''}}" data-current="0" bindtap="swichNav">全部</view>
+  <view class="swiper-tab-list {{currentTab==1 ? 'on' : ''}}" data-current="1" bindtap="swichNav">订单奖励</view>
+  <view class="swiper-tab-list {{currentTab==2 ? 'on' : ''}}" data-current="2" bindtap="swichNav">收益</view>
+  <view class="swiper-tab-list {{currentTab==3 ? 'on' : ''}}" data-current="3" bindtap="swichNav">提现</view>
+</view>
+<swiper current="{{currentTab}}" class="swiper-box" duration="300" style="height:{{winHeight - 31}}px" bindchange="bindChange">
+  <swiper-item>
+    <view wx:if="{{totalintegralrecorddata.length !=0}}">
+      <scroll-view scroll-y='true' style="height: {{winHeight?winHeight+'px':'auto'}}" bindscrolltolower="totalintegralrecordFloadMore">
+        <view wx:for="{{totalintegralrecorddata}}" wx:for-item="item" wx:key="totalintegralrecorddata">
+          <view class='fontright' style='margin:10rpx;'>
+            <view style='color:red'>{{item.title}}</view>
+            <view style='color:green' wx:if="{{item.ptype==0}}">+{{item.integral}}</view>
+            <view style='color:green' wx:if="{{item.ptype==2}}">+{{item.integral}}</view>
+            <view style='color:red' wx:if="{{item.ptype==1}}">-{{item.integral}}</view>
+            <view style='color:red' wx:if="{{item.ptype==3}}">-{{item.integral}}</view>
+          </view>
+          <view style='margin:5rpx;font-size:24rpx;'>{{item.note}}</view>
+          <view class='fontright' style='margin:5rpx;font-size:24rpx;color:#999'>
+            <view>创建时间{{item.create_at}}</view>
+          </view>
+          <view class='border'></view>
+        </view>
+        <view style='height:30px;'></view>
+      </scroll-view>
+    </view>
+    <view wx:else style='text-align:center'>暂无积分记录</view>
+  </swiper-item>
+  <swiper-item>
+    <view wx:if="{{orderintegralrecorddata.length !=0}}">
+      <scroll-view scroll-y='true' style="height: {{winHeight?winHeight+'px':'auto'}}" bindscrolltolower="orderintegralrecordFloadMore">
+        <view wx:for="{{orderintegralrecorddata}}" wx:for-item="item" wx:key="orderintegralrecorddata">
+          <view class='fontright' style='margin:10rpx;'>
+            <view style='color:red'>{{item.title}}</view>
+            <view style='color:green' wx:if="{{item.ptype==0}}">+{{item.integral}}</view>
+            <view style='color:green' wx:if="{{item.ptype==2}}">+{{item.integral}}</view>
+            <view style='color:red' wx:if="{{item.ptype==1}}">-{{item.integral}}</view>
+            <view style='color:red' wx:if="{{item.ptype==3}}">-{{item.integral}}</view>
+          </view>
+          <view style='margin:5rpx;font-size:24rpx;'>{{item.note}}</view>
+          <view class='fontright' style='margin:5rpx;font-size:24rpx;color:#999'>
+            <view>创建时间{{item.create_at}}</view>
+          </view>
+          <view class='border'></view>
+        </view>
+        <view style='height:30px;'></view>
+      </scroll-view>
+    </view>
+    <view wx:else style='text-align:center'>暂无积分记录</view>
+  </swiper-item>
+  <swiper-item>
+    <view wx:if="{{profitintegralrecorddata.length !=0}}">
+      <scroll-view scroll-y='true' style="height: {{winHeight?winHeight+'px':'auto'}}" bindscrolltolower="profitintegralrecordFloadMore">
+        <view wx:for="{{profitintegralrecorddata}}" wx:for-item="item" wx:key="profitintegralrecorddata">
+          <view class='fontright' style='margin:10rpx;'>
+            <view style='color:red'>{{item.title}}</view>
+            <view style='color:green' wx:if="{{item.ptype==0}}">+{{item.integral}}</view>
+            <view style='color:green' wx:if="{{item.ptype==2}}">+{{item.integral}}</view>
+            <view style='color:red' wx:if="{{item.ptype==1}}">-{{item.integral}}</view>
+            <view style='color:red' wx:if="{{item.ptype==3}}">-{{item.integral}}</view>
+          </view>
+          <view style='margin:5rpx;font-size:24rpx;'>{{item.note}}</view>
+          <view class='fontright' style='margin:5rpx;font-size:24rpx;color:#999'>
+            <view>创建时间{{item.create_at}}</view>
+          </view>
+          <view class='border'></view>
+        </view>
+        <view style='height:30px;'></view>
+      </scroll-view>
+    </view>
+    <view wx:else style='text-align:center'>暂无积分记录</view>
+  </swiper-item>
+  <swiper-item>
+    <view wx:if="{{cashintegralrecorddata.length !=0}}">
+      <scroll-view scroll-y='true' style="height: {{winHeight?winHeight+'px':'auto'}}" bindscrolltolower="cashintegralrecordFloadMore">
+        <view wx:for="{{cashintegralrecorddata}}" wx:for-item="item" wx:key="cashintegralrecorddata">
+          <view class='fontright' style='margin:10rpx;'>
+            <view style='color:red'>{{item.title}}</view>
+            <view style='color:green' wx:if="{{item.ptype==0}}">+{{item.integral}}</view>
+            <view style='color:green' wx:if="{{item.ptype==2}}">+{{item.integral}}</view>
+            <view style='color:red' wx:if="{{item.ptype==1}}">-{{item.integral}}</view>
+            <view style='color:red' wx:if="{{item.ptype==3}}">-{{item.integral}}</view>
+          </view>
+          <view style='margin:5rpx;font-size:24rpx;'>{{item.note}}</view>
+          <view class='fontright' style='margin:5rpx;font-size:24rpx;color:#999'>
+            <view>创建时间{{item.create_at}}</view>
+          </view>
+          <view class='border'></view>
+        </view>
+        <view style='height:30px;'></view>
+      </scroll-view>
+    </view>
+    <view wx:else style='text-align:center'>暂无积分记录</view>
+  </swiper-item>
+</swiper>

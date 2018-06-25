@@ -83,7 +83,7 @@ Page({
   //轮播图点击跳转
   onclikUrl: function(event) {
     var that = this;
-    console.log(that.data.banner[0].itemId)
+    // console.log(that.data.banner[0].itemId)
     wx.navigateTo({
       url: '../pinpagedetail/pinpagedetail?productId=' + that.data.banner[0].itemId
     });

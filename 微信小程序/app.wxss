@@ -1,3 +1,8 @@
 /**app.wxss**/
 @import 'zanui/index.wxss';
-
+/* 滚动条优化 */
+::-webkit-scrollbar {
+  width: 0;
+  height: 0;
+  color: transparent;
+}

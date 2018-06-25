@@ -1,0 +1,46 @@
+<view class="userinfo">
+  <image bindtap="usersetting" class="userinfo-avatar" src="{{userdata.imageUrl}}"></image>
+  <view class="userinfo-nickname">
+    {{userdata.nickName}}
+    <view style='font-size:24rpx;'>我的ID:{{userdata.userId}}</view>
+    <view style='font-size:24rpx;'>我的好友:{{userdata.invitedNum}}</view>
+  </view>
+  <view class="userinfo-setting" bindtap='usersetting'>账户设置</view>
+</view>
+<view class='userinfo-info'></view>
+<view class='userinfo-border2'></view>
+<view class='userinfo-intergal fontright' bindtap='onclickwithdraw'>
+  <view>可提现积分<view style='color:#999;font-size:24rpx;'>(点击去提现)</view></view>
+  <view>{{userdata.whiteIntegral}}></view>
+</view>
+<view class='userinfo-border'></view>
+<view class='userinfo-intergal fontright' bindtap='onclickIntegral'>
+  <view>积分记录</view>
+  <view>></view>
+</view>
+<view class='userinfo-border2'></view>
+<view class='userinfo-intergal fontright' bindtap='onclickorder'>
+  <view>我的订单</view>
+  <view>></view>
+</view>
+<view class='userinfo-border'></view>
+<view class='userinfo-intergal fontright' bindtap='onclicksubmitorder'>
+  <view>提交订单</view>
+  <view>></view>
+</view>
+<view class='userinfo-border2'></view>
+<view class='userinfo-intergal fontright' bindtap='onclickreferee'>
+  <view>我的推荐人</view>
+  <view>></view>
+</view>
+<view class='userinfo-border'></view>
+<view class='userinfo-intergal fontright' bindtap='onclickfriend'>
+  <view>我的好友</view>
+  <view>></view>
+</view>
+<view class='userinfo-border'></view>
+<view class='userinfo-intergal fontright' bindtap='onclickcustomerService'>
+  <view>官方客服</view>
+  <view>></view>
+</view>
+<view class='userinfo-border'></view>

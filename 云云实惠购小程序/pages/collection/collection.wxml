@@ -1,0 +1,50 @@
+<view>
+  <view class="swiper-tab">
+    <view class="swiper-tab-list {{currentTab==0 ? 'on' : ''}}" data-current="0" bindtap="swichNav">我的收藏商品</view>
+  </view>
+  <view style='color:#fd72a9;font-size:24rpx;margin:10rpx;'>如未发现您新收藏的商品,请下拉刷新哦</view>
+  <swiper current="{{currentTab}}" class="swiper-box" duration="300" style="height:{{winHeight - 31}}px" bindchange="bindChange">
+    <swiper-item>
+      <!-- 淘宝收藏 -->
+    <loading hidden="{{hidden}}" bindchange="loadingChange">
+      加载中...
+    </loading>
+    <scroll-view scroll-y='true' style="height: {{winHeight?winHeight+'px':'auto'}}" bindscrolltolower="taobaoloadMore" bindscrolltoupper="taobaorefesh">
+      <view wx:if="{{hasRefesh}}" class='goodrefesh'>
+        <icon type="waiting" size="25" />
+        <text>刷新中...</text>
+      </view>
+      <view wx:if="{{taobaodata.length !=0}}">
+        <view wx:for="{{taobaodata}}" wx:for-item="item" wx:key="taobaodata"   class='fontright'>
+          <view style='width:40%;'>
+            <view style='text-align:center;' data-id='{{item.productId}}' bindtap="bindViewTap">
+              <image class='goodimg' src="{{item.mainPic}}"></image>
+            </view>
+          </view>
+          <view style='width:60%;'>
+            <view style="margin:10rpx;font-size:30rpx" data-id='{{item.productId}}' bindtap="bindViewTap">
+              <text class='goodsource'>{{item.source}}</text> {{item.title}}
+            </view>
+            <view>
+              <text class='goodprice'>￥{{item.price}} </text>
+              <text class='goodoriginprice' wx:if="{{item.couponPrice !=0}}">原价:<text style='text-decoration:line-through;'>￥{{item.originPrice}}</text></text>
+              <text class='goodsale'>已售{{item.salesNum}}件</text>
+            </view>
+            <view>
+              <text class='goodcoupon' wx:if="{{item.couponPrice !=0}}">{{item.couponPrice}}元优惠券 </text>
+              <text class='goodintegral'>约奖{{item.integral}}积分</text>
+              <image src='../../pages/images/icon_del.png' style='width:40rpx;height:40rpx;margin:0rpx 0rpx -10rpx 20rpx' title='删除' data-id='{{item.productId}}' bindtap="bindgooddel"></image> <text style='color:#999' data-id='{{item.productId}}' bindtap="bindgooddel">删除</text>
+            </view>
+          </view>
+        </view>
+        <view class="weui-loadmore" hidden="{{isHideLoadMore}}">
+          <view class="weui-loading"></view>
+          <view class="weui-loadmore__tips">商品加载完成....</view>
+        </view>
+      </view>
+      <view wx:else style='text-align:center'>暂无商品</view>
+      <view style="height:15px;"></view>
+    </scroll-view>
+    </swiper-item>
+  </swiper>
+</view>

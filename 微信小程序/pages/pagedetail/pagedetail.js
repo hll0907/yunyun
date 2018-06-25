@@ -8,7 +8,7 @@ Page({
     detailImagesdata: [],
     productIds: '',
     islike: false,
-    userId: 790714,
+    userId: app.globalData.userId,
     couponUrls: '',
     convert_urls: '',
     shopname: '',

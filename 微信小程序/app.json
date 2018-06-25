@@ -1,12 +1,12 @@
 {
   "pages": [
     "pages/index/index",
+    "pages/my/my",
+    "pages/collection/collection",
     "pages/pin/pin",
     "pages/search/search",
     "pages/pinsearch/pinsearch",
     "pages/supersearch/supersearch",
-    "pages/collection/collection",
-    "pages/my/my",
     "pages/newview/newview",
     "pages/pagedetail/pagedetail",
     "pages/pinpagedetail/pinpagedetail",        

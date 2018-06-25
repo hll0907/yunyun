@@ -1,0 +1,25 @@
+<view style='font-size:36rpx;background:#fd72a9;text-align:center;'>
+  <view style='height:20rpx;'></view>
+  <text style='color:#fff;margin:25rpx;'>积分提现记录</text>
+  <view style='height:20rpx;'></view>
+</view>
+<view>
+  <scroll-view scroll-y='true' style="height: {{winHeight?winHeight+'px':'auto'}}" bindscrolltolower="cashrecordloadMore">
+    <view wx:for="{{cashrecorddata}}" wx:for-item="item" wx:key="cashrecorddata">
+      <view class='fontright' style='margin:5rpx;'>
+        <view wx:if="{{item.status==0}}" style='color:red'>申请驳回</view>
+        <view wx:if="{{item.status==1}}" style='color:orange'>申请中</view>
+        <view wx:if="{{item.status==2}}" style='color:green'>发放成功</view>
+        <view style='color:green' wx:if="{{item.status==0}}">+{{item.integral}}</view>
+        <view style='color:red' wx:else>-{{item.integral}}</view>
+      </view>
+      <view style='margin:5rpx;font-size:24rpx;'>{{item.note}}</view>
+      <view class='fontright' style='margin:5rpx;font-size:24rpx;color:#999'>
+        <view>提交时间{{item.created_at}}</view>
+        <view>更新时间{{item.updatedAt}}</view>
+      </view>
+      <view class='border'></view>
+    </view>
+    <view style='height:30px;'></view>
+  </scroll-view>
+</view>
