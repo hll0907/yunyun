@@ -1,2 +1,4 @@
 <!--pages/customerService/customerService.wxml-->
-<text>pages/customerService/customerService.wxml</text>
+<view class='myView'>第一种方式实现：</view>
+<contact-button class='cBtn' type="default-dark" size="20" session-from="weapp">
+</contact-button> 

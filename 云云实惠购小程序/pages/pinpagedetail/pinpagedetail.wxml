@@ -54,7 +54,7 @@
     <button class="button-green" bindtap="onclickaddLike" formType="submit" wx:if="{{islike==false}}">加入收藏</button>
     <button class="button-green" bindtap="onclickdelLike" formType="submit" wx:else>取消收藏</button>
     </label>
-    <label><button class="buttonpink" bindtap="onclickBuy" formType="submit">领券参团</button></label>
-    <label><button class="button-red" bindtap="onclickBuy" formType="submit">领券拼团</button></label>
+    <label><button class="buttonpink" bindtap="onclicknormalUrl" formType="submit">领券参团</button></label>
+    <label><button class="button-red" bindtap="onclickgroupUrl" formType="submit">领券拼团</button></label>
   </view>
 </view>

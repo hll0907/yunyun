@@ -62,7 +62,6 @@ Page({
         }
       }
     })
-
   },
   showtip: function(e) {
     wx.showModal({

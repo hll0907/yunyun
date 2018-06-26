@@ -1,5 +1,3 @@
-<import src="../../wxParse/wxParse.wxml" />
 <view>
-<template is="wxParse" data="{{wxParseData:article.nodes}}" />
-<!-- <web-view src="https://shg.yuf2.cn/shop#/shg/activity"></web-view> -->
+  <web-view src="{{urls}}"></web-view>
 </view>

@@ -1,6 +1,8 @@
 {
   "pages": [
     "pages/index/index",
+    "pages/pin/pin",
+    "pages/pinCouponUrl/pinCouponUrl",        
     "pages/friend/friend",
     "pages/friends/friends",        
     "pages/referee/referee",        
@@ -17,7 +19,6 @@
     "pages/setting/setting",
     "pages/my/my",
     "pages/collection/collection",
-    "pages/pin/pin",
     "pages/search/search",
     "pages/pinsearch/pinsearch",
     "pages/supersearch/supersearch",

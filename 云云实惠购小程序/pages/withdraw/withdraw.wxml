@@ -9,18 +9,20 @@
 <view style='margin:10rpx;font-size:32rpx;'>请选择提现方式</view>
 <view class='border2'></view>
 <view class='fontright'>
+  <view></view>
   <view style='margin:20rpx;'>
     <button style='font-size:36rpx;' type='{{alipaybuttontype}}' bindtap='onclickalipay'>支 付 宝</button>
-    <view style='color:#999;font-size:24rpx;margin-left:10rpx;'>(700积分=1元)</view>
+    <view style='color:#999;font-size:24rpx;'>(700积分=1元)</view>
   </view>
   <view style='margin:20rpx;'>
     <button style='font-size:36rpx;' type='{{weixinbuttontype}}' bindtap='onclickweixin'>微信钱包</button>
-    <view style='color:#999;font-size:24rpx;margin-left:20rpx;'>(700积分=1元)</view>
+    <view style='color:#999;font-size:24rpx;'>(700积分=1元)</view>
   </view>
-  <view style='margin:20rpx;'>
+  <view></view>
+  <!-- <view style='margin:20rpx;'>
     <button style='font-size:36rpx;' type='{{ylhbuttontype}}' bindtap='onclickylh'>云联账户</button>
     <view style='color:#999;font-size:24rpx;margin-left:10rpx;'>(1积分=1白积分)</view>
-  </view>
+  </view> -->
 </view>
 <view class='border'></view>
 <view class='fontright'>

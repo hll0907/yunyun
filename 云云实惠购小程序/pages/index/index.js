@@ -88,7 +88,7 @@ Page({
     wx.navigateTo({
       url: '../newview/newview?url=' + that.data.url
     });
-    console.log(that.data.url)
+    // console.log(that.data.url)
   },
   //  滑动切换tab 
   bindChange: function(e) {

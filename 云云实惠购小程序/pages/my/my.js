@@ -3,7 +3,8 @@
 const app = getApp()
 Page({
   data: {
-    userdata: []
+    userdata: [],
+    userId: app.globalData.userId
   },
   onLoad: function() {
     this.getuserdata()
@@ -50,12 +51,12 @@ Page({
       url: '../friend/friend'
     })
   }, 
-  //我的客服
-  onclickcustomerService: function() {
-    wx.navigateTo({
-      url: '../customerService/customerService'
-    })
-  },
+  // //我的客服
+  // onclickcustomerService: function() {
+  //   wx.navigateTo({
+  //     url: '../customerService/customerService'
+  //   })
+  // },
   onShow: function() {
     this.getuserdata()
   },

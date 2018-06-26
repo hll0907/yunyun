@@ -17,12 +17,12 @@
       <view wx:if="{{taobaodata.length !=0}}">
         <view wx:for="{{taobaodata}}" wx:for-item="item" wx:key="taobaodata"   class='fontright'>
           <view style='width:40%;'>
-            <view style='text-align:center;' data-id='{{item.productId}}' bindtap="bindViewTap">
+            <view style='text-align:center;' data-id='{{item.productId}}' bindtap="bindViewTap"  data-goodtype='{{item.type}}'>
               <image class='goodimg' src="{{item.mainPic}}"></image>
             </view>
           </view>
           <view style='width:60%;'>
-            <view style="margin:10rpx;font-size:30rpx" data-id='{{item.productId}}' bindtap="bindViewTap">
+            <view style="margin:10rpx;font-size:30rpx" data-id='{{item.productId}}' bindtap="bindViewTap"  data-goodtype='{{item.type}}'>
               <text class='goodsource'>{{item.source}}</text> {{item.title}}
             </view>
             <view>
@@ -33,7 +33,7 @@
             <view>
               <text class='goodcoupon' wx:if="{{item.couponPrice !=0}}">{{item.couponPrice}}元优惠券 </text>
               <text class='goodintegral'>约奖{{item.integral}}积分</text>
-              <image src='../../pages/images/icon_del.png' style='width:40rpx;height:40rpx;margin:0rpx 0rpx -10rpx 20rpx' title='删除' data-id='{{item.productId}}' bindtap="bindgooddel"></image> <text style='color:#999' data-id='{{item.productId}}' bindtap="bindgooddel">删除</text>
+              <image src='../../pages/images/icon_del.png' style='width:40rpx;height:40rpx;margin:0rpx 0rpx -10rpx 20rpx' title='删除' data-id='{{item.productId}}' data-goodtype='{{item.type}}' bindtap="bindgooddel"></image> <text style='color:#999' data-id='{{item.productId}}' bindtap="bindgooddel" data-id='{{item.productId}}' data-goodtype='{{item.type}}' >删除</text>
             </view>
           </view>
         </view>

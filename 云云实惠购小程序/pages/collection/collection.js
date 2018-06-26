@@ -15,7 +15,7 @@ Page({
     taobaodata: [],
     taobaopage: 1,
     pinduoduodata: [],
-    pinduoduopage: 1
+    pinduoduopage: 1,
   },
   onLoad: function(options) {
     var that = this;
@@ -75,10 +75,9 @@ Page({
       method: 'POST',
       dataType: '',
       success: function(res) {
-        // console.log(res)
         that.setData({
           taobaodata: res.data.result,
-          hidden: true
+          hidden: true,
         })
       },
       fail: function(res) {
@@ -154,48 +153,90 @@ Page({
   //收藏商品点击跳转到商品详情
   bindViewTap: function(e) {
     var productId = e.currentTarget.dataset.id;
-    wx.navigateTo({
-      url: '../pagedetail/pagedetail?productId=' + productId
-    });
+    var goodtype = e.currentTarget.dataset.goodtype;
+    console.log(productId)
+    console.log(goodtype)
+    if (goodtype == 'pdd') {
+      wx.navigateTo({
+        url: '../pinpagedetail/pinpagedetail?productId=' + productId
+      });
+    } else {
+      wx.navigateTo({
+        url: '../pagedetail/pagedetail?productId=' + productId
+      });
+
+    }
   },
   bindgooddel: function(e) {
     var productId = e.currentTarget.dataset.id;
-    // console.log(productId)
+    var goodtype = e.currentTarget.dataset.goodtype;
+    console.log(productId)
+    console.log(goodtype)
     var that = this;
     wx.showModal({
       title: '云云实惠购提示您',
       content: '确定要删除您的收藏吗?',
       confirmText: '确定删除',
       confirmColor: 'red',
-      cancelColor:'#3CC51F',
+      cancelColor: '#3CC51F',
       success: function(res) {
         if (res.confirm) {
-          wx.request({
-            url: app.globalData.taobaodelcollectionurl,
-            data: {
-              userId: app.globalData.userId,
-              productIds: productId,
-            },
-            header: {
-              "Content-Type": "application/x-www-form-urlencoded"
-            },
-            method: 'POST',
-            dataType: '',
-            success: function(res) {
-              // console.log(res)
-              wx.showToast({
-                title: res.data.message,
-                icon: 'succes',
-                duration: 2000,
-                mask: true
-              })
-              that.taobaocollection();
-            },
-            fail: function(res) {
-              console.log(res)
-            },
-          })
-        } else if(res.cancel) {
+          if (goodtype == 'pdd') {
+            wx.request({
+              url: app.globalData.taobaodelcollectionurl,
+              data: {
+                userId: app.globalData.userId,
+                productIds: productId,
+                type:2
+              },
+              header: {
+                "Content-Type": "application/x-www-form-urlencoded"
+              },
+              method: 'POST',
+              dataType: '',
+              success: function(res) {
+                // console.log(res)
+                wx.showToast({
+                  title: res.data.message,
+                  icon: 'succes',
+                  duration: 2000,
+                  mask: true
+                })
+                that.taobaocollection();
+              },
+              fail: function(res) {
+                console.log(res)
+              },
+            })
+          } else {
+            wx.request({
+              url: app.globalData.taobaodelcollectionurl,
+              data: {
+                userId: app.globalData.userId,
+                productIds: productId,
+                type:1
+              },
+              header: {
+                "Content-Type": "application/x-www-form-urlencoded"
+              },
+              method: 'POST',
+              dataType: '',
+              success: function(res) {
+                // console.log(res)
+                wx.showToast({
+                  title: res.data.message,
+                  icon: 'succes',
+                  duration: 2000,
+                  mask: true
+                })
+                that.taobaocollection();
+              },
+              fail: function(res) {
+                console.log(res)
+              },
+            })
+          }
+        } else if (res.cancel) {
           wx.showToast({
             title: '您取消了删除',
             icon: 'succes',

@@ -10,7 +10,9 @@
 <view class='userinfo-info'></view>
 <view class='userinfo-border2'></view>
 <view class='userinfo-intergal fontright' bindtap='onclickwithdraw'>
-  <view>可提现积分<view style='color:#999;font-size:24rpx;'>(点击去提现)</view></view>
+  <view>可提现积分
+    <view style='color:#999;font-size:24rpx;'>(点击去提现)</view>
+  </view>
   <view>{{userdata.whiteIntegral}}></view>
 </view>
 <view class='userinfo-border'></view>
@@ -39,8 +41,11 @@
   <view>></view>
 </view>
 <view class='userinfo-border'></view>
-<view class='userinfo-intergal fontright' bindtap='onclickcustomerService'>
+<view class='userinfo-intergal fontright'>
   <view>官方客服</view>
-  <view>></view>
+  <view>
+    <contact-button  type="default-dark" size="20" session-from="{{userId}}" style="opacity:0.5">
+    </contact-button>
+  </view>
 </view>
 <view class='userinfo-border'></view>

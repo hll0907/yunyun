@@ -1,0 +1,2 @@
+<!--pages/pinCouponUrl/pinCouponUrl.wxml-->
+ <web-view src="{{couponUrl}}"></web-view> 
