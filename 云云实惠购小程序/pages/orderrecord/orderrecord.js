@@ -1,6 +1,7 @@
 const app = getApp()
 Page({
   data: {
+    userId:0,
     totalintegralrecorddata: [],
     orderintegralrecorddata: [],
     profitintegralrecorddata: [],
@@ -18,6 +19,15 @@ Page({
   },
   onLoad: function() {
     var that = this;
+    wx.getStorage({
+      key: 'userId',
+      success: function (res) {
+        that.setData({
+          userId: res.data
+        })
+        console.log(res.data)
+      }
+    })
     //  获取系统信息 
     wx.getSystemInfo({
       success: function(res) {
@@ -75,7 +85,7 @@ Page({
     wx.request({
       url: app.globalData.dataurl + '/order/list',
       data: {
-        userId: app.globalData.userId,
+        userId: that.data.userId,
         status: 1,
         page: 1
       },
@@ -101,7 +111,7 @@ Page({
       wx.request({
         url: app.globalData.dataurl + '/order/list',
         data: {
-          userId: app.globalData.userId,
+          userId: that.data.userId,
           status: 2,
           page: ++that.data.totalintegralrecordpage
         },
@@ -130,7 +140,7 @@ Page({
     wx.request({
       url: app.globalData.dataurl + '/order/list',
       data: {
-        userId: app.globalData.userId,
+        userId: that.data.userId,
         status: 2,
         page: 1
       },
@@ -156,7 +166,7 @@ Page({
       wx.request({
         url: app.globalData.dataurl + '/order/list',
         data: {
-          userId: app.globalData.userId,
+          userId: that.data.userId,
           status: 1,
           page: ++that.data.orderintegralrecordpage
         },
@@ -185,7 +195,7 @@ Page({
     wx.request({
       url: app.globalData.dataurl + '/order/list',
       data: {
-        userId: app.globalData.userId,
+        userId: that.data.userId,
         status: 3,
         page: 1
       },
@@ -211,7 +221,7 @@ Page({
       wx.request({
         url: app.globalData.dataurl + '/order/list',
         data: {
-          userId: app.globalData.userId,
+          userId: that.data.userId,
           status: 3,
           page: ++that.data.profitintegralrecordpage
         },
@@ -240,7 +250,7 @@ Page({
     wx.request({
       url: app.globalData.dataurl + '/order/list',
       data: {
-        userId: app.globalData.userId,
+        userId: that.data.userId,
         status: 4,
         page: 1
       },
@@ -266,7 +276,7 @@ Page({
       wx.request({
         url: app.globalData.dataurl + '/order/list',
         data: {
-          userId: app.globalData.userId,
+          userId: that.data.userId,
           status: 4,
           page: ++that.data.cashintegralrecordpage
         },

@@ -69,6 +69,17 @@ Page({
     that.zhinengtuijiansearch();
     // console.log(keyword)
   },
+  onShareAppMessage: function(res) {
+    if (res.from === 'button') {
+      // 来自页面内转发按钮
+      console.log(res.target)
+    }
+    return {
+      title: '【@我】快来使用云云实惠购',
+      path: '/pages/login/login',
+      imageUrl: ''
+    }
+  },
   //  滑动切换tab 
   bindChange: function(e) {
     var that = this;
@@ -137,6 +148,11 @@ Page({
       dataType: '',
       success: function(res) {
         // console.log(res)
+        if (res.data.result.length < 10) {
+          that.setData({
+            nulldata: true
+          })
+        }
         that.setData({
           zhinengtuijiandata: res.data.result,
           hidden: true
@@ -167,6 +183,11 @@ Page({
         success: function(res) {
           // console.log(res.data);
           if (res.statusCode == 200) {
+            if (res.data.result == '') {
+              that.setData({
+                nulldata: true
+              })
+            }
             // console.log(res.data.result)
             that.setData({
               zhinengtuijiandata: that.data.zhinengtuijiandata.concat(res.data.result),
@@ -234,6 +255,11 @@ Page({
       dataType: '',
       success: function(res) {
         // console.log(res)
+        if (res.data.result.length < 9) {
+          that.setData({
+            jianglizuigaonulldata: true
+          })
+        }
         that.setData({
           jianglizuigaodata: res.data.result,
           hidden: true
@@ -264,6 +290,11 @@ Page({
         success: function(res) {
           // console.log(res)
           if (res.statusCode == 200) {
+            if (res.data.result == '') {
+              that.setData({
+                jianglizuigaonulldata: true
+              })
+            }
             // console.log(res.data.result)
             that.setData({
               jianglizuigaodata: that.data.jianglizuigaodata.concat(res.data.result),
@@ -328,6 +359,11 @@ Page({
       dataType: '',
       success: function(res) {
         // console.log(res)
+        if (res.data.result.length < 9) {
+          that.setData({
+            youhuizuidanulldata: true
+          })
+        }
         that.setData({
           youhuizuidadata: res.data.result,
           hidden: true
@@ -359,6 +395,11 @@ Page({
         success: function(res) {
           // console.log(res)
           if (res.statusCode == 200) {
+            if (res.data.result == '') {
+              that.setData({
+                youhuizuidanulldata: true
+              })
+            }
             // console.log(res.data.result)
             that.setData({
               youhuizuidadata: that.data.youhuizuidadata.concat(res.data.result),
@@ -424,6 +465,11 @@ Page({
       dataType: '',
       success: function(res) {
         // console.log(res)
+        if (res.data.result.length < 9) {
+          that.setData({
+            xiaoliangzuigaonulldata: true
+          })
+        }
         that.setData({
           xiaoliangzuigaodata: res.data.result,
           hidden: true
@@ -455,6 +501,11 @@ Page({
           // console.log(res)
           if (res.statusCode == 200) {
             // console.log(res.data.result)
+            if (res.data.result == '') {
+              that.setData({
+                xiaoliangzuigaonulldata: true
+              })
+            }
             that.setData({
               xiaoliangzuigaodata: that.data.xiaoliangzuigaodata.concat(res.data.result),
               isHideLoadMore: false,

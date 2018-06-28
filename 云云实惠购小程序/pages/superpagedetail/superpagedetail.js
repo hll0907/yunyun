@@ -8,11 +8,11 @@ Page({
     detailImagesdata: [],
     productIds: '',
     islike: false,
-    userId: app.globalData.userId,
     couponUrls: '',
     convert_urls: '',
     shopname: '',
-    logoUrls: ''
+    logoUrls: '',
+    userId:''
   },
   //轮播图的切换事件  
   swiperChange: function(e) {
@@ -38,6 +38,15 @@ Page({
       couponurls = 'couponurls';
     }
     var that = this;
+    wx.getStorage({
+      key: 'userId',
+      success: function (res) {
+        that.setData({
+          userId: res.data
+        })
+        // console.log(res.data)
+      }
+    })
     that.setData({
       detail: item,
       couponUrls: couponurls,
@@ -45,9 +54,9 @@ Page({
       shopname: item.title,
       logoUrls: item.mainPic
     });
-    console.log(couponurls)
+    // console.log(couponurls)
     wx.request({
-      url: 'http://shg.yuf2.cn:8080/shg-api/api/product/images?productId=' + productIds,
+      url: 'https://shg.yuf2.cn/shg-api/api/product/images?productId=' + productIds,
       method: 'GET',
       success: function(res) {
         // console.log(res.data);
@@ -111,7 +120,7 @@ Page({
       method: 'GET',
       success: function(res) {
         if (res.statusCode == 200) {
-          console.log(res.data)
+          // console.log(res.data)
           if (res.data.code == 1) {
             wx.setClipboardData({
               data: res.data.result,
@@ -130,7 +139,7 @@ Page({
                   confirmColor: 'red',
                   success: function(res) {
                     if (res.confirm) {
-                      console.log('确定')
+                      // console.log('确定')
                     }
                   }
                 })
@@ -150,7 +159,7 @@ Page({
               confirmText: '点击刷新',
               success: function(res) {
                 if (res.confirm) {
-                  console.log('确定')
+                  // console.log('确定')
                   that.onclickBuy();
                 }
               }

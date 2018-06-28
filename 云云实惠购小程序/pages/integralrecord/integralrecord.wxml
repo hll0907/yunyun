@@ -30,7 +30,7 @@
         <view style='height:30px;'></view>
       </scroll-view>
     </view>
-    <view wx:else style='text-align:center'>暂无积分记录</view>
+    <view wx:else style='text-align:center;text-align:#999'>---暂无积分记录---</view>
   </swiper-item>
   <swiper-item>
     <view wx:if="{{orderintegralrecorddata.length !=0}}">
@@ -52,7 +52,7 @@
         <view style='height:30px;'></view>
       </scroll-view>
     </view>
-    <view wx:else style='text-align:center'>暂无积分记录</view>
+     <view wx:else style='text-align:center;text-align:#999'>---暂无积分记录---</view>
   </swiper-item>
   <swiper-item>
     <view wx:if="{{profitintegralrecorddata.length !=0}}">
@@ -74,7 +74,7 @@
         <view style='height:30px;'></view>
       </scroll-view>
     </view>
-    <view wx:else style='text-align:center'>暂无积分记录</view>
+     <view wx:else style='text-align:center;text-align:#999'>---暂无积分记录---</view>
   </swiper-item>
   <swiper-item>
     <view wx:if="{{cashintegralrecorddata.length !=0}}">
@@ -96,6 +96,6 @@
         <view style='height:30px;'></view>
       </scroll-view>
     </view>
-    <view wx:else style='text-align:center'>暂无积分记录</view>
+    <view wx:else style='text-align:center;text-align:#999'>---暂无积分记录---</view>
   </swiper-item>
 </swiper>

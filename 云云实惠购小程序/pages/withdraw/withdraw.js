@@ -2,6 +2,7 @@ const app = getApp()
 
 Page({
   data: {
+    userId: '',
     userdata: [],
     whiteIntegral: 0,
     alipaybuttontype: 'default',
@@ -15,19 +16,29 @@ Page({
   },
   onLoad: function() {
     var that = this;
-    that.getintegral()
+    wx.getStorage({
+      key: 'userId',
+      success: function(res) {
+        that.setData({
+          userId: res.data
+        })
+        console.log(res.data)
+        that.getintegral()
+      }
+    })
     that.onclickalipay();
   },
   getintegral: function() {
     var that = this;
+    console.log(that.data.userId)
     wx.request({
-      url: app.globalData.dataurl + '/integral/total?userId=' + app.globalData.userId,
+      url: app.globalData.dataurl + '/integral/total?userId=' + that.data.userId,
       method: 'GET',
       header: {
         'content-Type': 'application/json'
       },
       success: function(res) {
-        // console.log(res.data);
+        console.log(res.data);
         if (res.statusCode == 200) {
           that.setData({
             whiteIntegral: res.data.result.whiteIntegral,
@@ -138,7 +149,7 @@ Page({
     var that = this;
     //integral/extract/alipay?userId=790714&integral=2000
     wx.request({
-      url: app.globalData.dataurl + '/integral/extract/alipay?userId=' + app.globalData.userId + '&integral=' + that.data.inputvalue,
+      url: app.globalData.dataurl + '/integral/extract/alipay?userId=' + that.data.userId + '&integral=' + that.data.inputvalue,
       method: 'POST',
       header: {
         "Content-Type": "application/x-www-form-urlencoded"
@@ -170,7 +181,7 @@ Page({
     var that = this;
     //integral/extract/alipay?userId=790714&integral=2000
     wx.request({
-      url: app.globalData.dataurl + '/integral/extract/wechat?userId=' + app.globalData.userId + '&integral=' + that.data.inputvalue,
+      url: app.globalData.dataurl + '/integral/extract/wechat?userId=' + that.data.userId + '&integral=' + that.data.inputvalue,
       method: 'POST',
       header: {
         "Content-Type": "application/x-www-form-urlencoded"
@@ -203,7 +214,7 @@ Page({
     var that = this;
     //http://shg.yuf2.cn:8080/shg-api/api/integral/submit_extract?userId=790714&integral=2000&ylhId=11&ylhPhone=11
     wx.request({
-      url: app.globalData.dataurl + '/integral/submit_extract?userId=' + app.globalData.userId + '&integral=' + that.data.inputvalue + '&ylhId=' + that.data.ylhId + '&ylhPhone=' + that.data.ylhPhone,
+      url: app.globalData.dataurl + '/integral/submit_extract?userId=' + that.data.userId + '&integral=' + that.data.inputvalue + '&ylhId=' + that.data.ylhId + '&ylhPhone=' + that.data.ylhPhone,
       method: 'POST',
       header: {
         "Content-Type": "application/x-www-form-urlencoded"

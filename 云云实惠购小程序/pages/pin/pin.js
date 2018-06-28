@@ -50,6 +50,17 @@ Page({
     });
     that.onclikjinxuan();
   },
+  onShareAppMessage: function (res) {
+    if (res.from === 'button') {
+      // 来自页面内转发按钮
+      console.log(res.target)
+    }
+    return {
+      title: '【@我】快来使用云云实惠购',
+      path: '/pages/login/login',
+      imageUrl: ''
+    }
+  },
   //  滑动切换tab 
   bindChange: function(e) {
     var that = this;

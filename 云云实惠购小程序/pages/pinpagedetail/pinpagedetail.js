@@ -7,7 +7,7 @@ Page({
     imagesdata: [],
     productId: '',
     islike: false,
-    userId: app.globalData.userId,
+    userId: '',
     couponUrls: '',
     convert_urls: '',
     shopname: '',
@@ -34,6 +34,15 @@ Page({
     var productIds = options.productId;
     // console.log(productIds)
     var that = this;
+    wx.getStorage({
+      key: 'userId',
+      success: function (res) {
+        that.setData({
+          userId: res.data
+        })
+        console.log(res.data)
+      }
+    })
     wx.request({
       url: 'https://shg.yuf2.cn/shg-api/api/product/detail?productId=' + productIds + '&type=2',
       method: 'GET',
@@ -170,7 +179,7 @@ Page({
     var productIds = that.data.productId;
     console.log(productIds)
     wx.request({
-      url: 'https://shg.yuf2.cn/shg-api/api/product/pdd-convert-url?productId=' + productIds + '&userId=' + app.globalData.userId,
+      url: 'https://shg.yuf2.cn/shg-api/api/product/pdd-convert-url?productId=' + productIds + '&userId=' + that.data.userId,
       method: 'POST',
       header: {
         "Content-Type": "application/x-www-form-urlencoded"
@@ -204,7 +213,7 @@ Page({
     var that = this;
     var productIds = that.data.productId;
     wx.request({
-      url: 'https://shg.yuf2.cn/shg-api/api/product/pdd-convert-url?productId=' + productIds + '&userId=' + app.globalData.userId,
+      url: 'https://shg.yuf2.cn/shg-api/api/product/pdd-convert-url?productId=' + productIds + '&userId=' + that.data.userId,
       method: 'POST',
       header: {
         "Content-Type": "application/x-www-form-urlencoded"

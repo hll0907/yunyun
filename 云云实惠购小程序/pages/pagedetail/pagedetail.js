@@ -8,7 +8,7 @@ Page({
     detailImagesdata: [],
     productIds: '',
     islike: false,
-    userId: app.globalData.userId,
+    userId: '',
     couponUrls: '',
     convert_urls: '',
     shopname: '',
@@ -30,6 +30,15 @@ Page({
   onLoad: function(options) {
     var productIds = options.productId;
     var that = this;
+    wx.getStorage({
+      key: 'userId',
+      success: function (res) {
+        that.setData({
+          userId: res.data
+        })
+        // console.log(res.data)
+      }
+    })
     wx.request({
       url: 'https://shg.yuf2.cn/shg-api/api/product/detail?productId=' + productIds,
       method: 'GET',
@@ -185,7 +194,7 @@ Page({
       header: { 'content-Type': 'application/json' },
       success: function(res) {
         if (res.statusCode == 200) {
-          console.log(res.data)
+          // console.log(res.data)
           if (res.data.code == 1) {
             wx.setClipboardData({
               data: res.data.result,
@@ -204,7 +213,7 @@ Page({
                   confirmColor:'red',
                   success: function(res) {
                     if (res.confirm) {
-                      console.log('确定')
+                      // console.log('确定')
                     }
                   }
                 })
@@ -224,7 +233,7 @@ Page({
               confirmText: '点击刷新',
               success: function(res) {
                 if (res.confirm) {
-                  console.log('确定')
+                  // console.log('确定')
                   that.onclickBuy();
                 }
               }

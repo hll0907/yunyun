@@ -123,7 +123,7 @@ Page({
     // var title = e.currentTarget.dataset.title;
     let str = JSON.stringify(e.currentTarget.dataset.item);
     let item = encodeURIComponent(str)
-    console.log(item)
+    // console.log(item)
     wx.navigateTo({
       url: '../superpagedetail/superpagedetail?productId=' + productId + "&item=" + item
     });
@@ -146,6 +146,11 @@ Page({
       dataType: '',
       success: function(res) {
         // console.log(res)
+        if(res.data.result.length<9){
+          that.setData({
+            nulldata:true
+          })
+        }
         that.setData({
           zhinengtuijiandata: res.data.result,
           hidden: true
@@ -176,6 +181,11 @@ Page({
           // console.log(res.data);
           if (res.statusCode == 200) {
             // console.log(res.data.result)
+            if (res.data.result =='') {
+              that.setData({
+                nulldata: true
+              })
+            }
             that.setData({
               zhinengtuijiandata: that.data.zhinengtuijiandata.concat(res.data.result),
               isHideLoadMore: false,
@@ -235,6 +245,11 @@ Page({
       dataType: '',
       success: function(res) {
         // console.log(res)
+        if(res.data.result.length<9){
+          that.setData({
+            salenulldata:true
+          })
+        }
         that.setData({
           jianglizuigaodata: res.data.result,
           hidden: true
@@ -265,6 +280,11 @@ Page({
           // console.log(res)
           if (res.statusCode == 200) {
             // console.log(res.data.result)
+            if (res.data.result=='') {
+              that.setData({
+                salenulldata: true
+              })
+            }
             that.setData({
               jianglizuigaodata: that.data.jianglizuigaodata.concat(res.data.result),
               isHideLoadMore: false,
@@ -328,6 +348,11 @@ Page({
       dataType: '',
       success: function(res) {
         // console.log(res)
+        if (res.data.result.length < 9) {
+          that.setData({
+            onlyquannulldata: true
+          })
+        }
         that.setData({
           youhuizuidadata: res.data.result,
           hidden: true
@@ -358,6 +383,11 @@ Page({
         success: function(res) {
           // console.log(res)
           if (res.statusCode == 200) {
+            if(res.data.result==''){
+              that.setData({
+                onlyquannulldata:true
+              })
+            }
             // console.log(res.data.result)
             that.setData({
               youhuizuidadata: that.data.youhuizuidadata.concat(res.data.result),
@@ -422,6 +452,11 @@ Page({
       dataType: '',
       success: function(res) {
         // console.log(res)
+        if(res.data.result.length<9){
+          that.setData({
+            haiwainulldata:true
+          })
+        }
         that.setData({
           xiaoliangzuigaodata: res.data.result,
           hidden: true
@@ -453,6 +488,11 @@ Page({
           // console.log(res)
           if (res.statusCode == 200) {
             // console.log(res.data.result)
+            if (res.data.result=='') {
+              that.setData({
+                haiwainulldata: true
+              })
+            }
             that.setData({
               xiaoliangzuigaodata: that.data.xiaoliangzuigaodata.concat(res.data.result),
               isHideLoadMore: false,
@@ -516,6 +556,11 @@ Page({
       dataType: '',
       success: function(res) {
         // console.log(res)
+        if(res.data.result.length<9){
+          that.setData({
+            tianmaonulldata:true
+          })
+        }
         that.setData({
           tianmaodata: res.data.result,
           hidden: true
@@ -547,6 +592,11 @@ Page({
           // console.log(res)
           if (res.statusCode == 200) {
             // console.log(res.data.result)
+            if (res.data.result=='') {
+              that.setData({
+                tianmaonulldata: true
+              })
+            }
             that.setData({
               tianmaodata: that.data.tianmaodata.concat(res.data.result),
               isHideLoadMore: false,

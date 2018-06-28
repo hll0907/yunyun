@@ -52,7 +52,8 @@
 
 .goodintegral {
   color: #f80;
-  margin-left: 10rpx;
+  font-size:42rpx;
+  margin: 20rpx;
 }
 
 .goodprice {
@@ -102,14 +103,14 @@
 
 .button-green {
   background-color: #4caf50; /* Green */
-  font-size: 24rpx;
+  font-size: 28rpx;
   margin-left: 20rpx;
   color: #fff;
 }
 
 .button-red {
   background-color: #f44336; /* 红色 */
-  font-size: 24rpx;
+  font-size: 28rpx;
   margin-left: 10rpx;
   color: #fff;
 }

@@ -1,0 +1,10 @@
+/* pages/login/login.wxss */
+.userinfo-avatar {
+  width: 256rpx;
+  height: 256rpx;
+  margin: 100rpx;
+  border-radius: 50%;
+}
+.buttonstyle{
+  margin: 20rpx;
+}

@@ -16,9 +16,20 @@ Page({
     taobaopage: 1,
     pinduoduodata: [],
     pinduoduopage: 1,
+    userId:0
   },
   onLoad: function(options) {
     var that = this;
+    wx.getStorage({
+      key: 'userId',
+      success: function (res) {
+        that.setData({
+          userId: res.data
+        })
+        // console.log(res.data)
+        that.taobaocollection();
+      }
+    })
     wx.getSystemInfo({
       success: function(res) {
         that.setData({
@@ -27,10 +38,19 @@ Page({
         });
       }
     });
-    that.taobaocollection();
   },
   onShow: function() {
-    this.taobaocollection();
+    var that = this;
+    wx.getStorage({
+      key: 'userId',
+      success: function (res) {
+        that.setData({
+          userId: res.data
+        })
+        // console.log(res.data)
+        that.taobaocollection();
+      }
+    })
   },
   //  滑动切换tab 
   bindChange: function(e) {
@@ -66,7 +86,7 @@ Page({
     wx.request({
       url: app.globalData.taobaocollectionurl,
       data: {
-        userId: app.globalData.userId,
+        userId: that.data.userId,
         page: 1,
       },
       header: {
@@ -93,7 +113,7 @@ Page({
       wx.request({
         url: app.globalData.taobaocollectionurl,
         data: {
-          userId: app.globalData.userId,
+          userId: that.data.userId,
           page: ++that.data.taobaopage,
         },
         header: {
@@ -112,7 +132,7 @@ Page({
               hasRefesh: false,
             });
           }
-          console.log(that.data.taobaopage)
+          // console.log(that.data.taobaopage)
         },
         fail: function(res) {
           console.log(res)
@@ -129,7 +149,7 @@ Page({
     wx.request({
       url: app.globalData.taobaocollectionurl,
       data: {
-        userId: app.globalData.userId,
+        userId: that.data.userId,
         page: 1,
       },
       header: {
@@ -154,8 +174,8 @@ Page({
   bindViewTap: function(e) {
     var productId = e.currentTarget.dataset.id;
     var goodtype = e.currentTarget.dataset.goodtype;
-    console.log(productId)
-    console.log(goodtype)
+    // console.log(productId)
+    // console.log(goodtype)
     if (goodtype == 'pdd') {
       wx.navigateTo({
         url: '../pinpagedetail/pinpagedetail?productId=' + productId
@@ -170,8 +190,8 @@ Page({
   bindgooddel: function(e) {
     var productId = e.currentTarget.dataset.id;
     var goodtype = e.currentTarget.dataset.goodtype;
-    console.log(productId)
-    console.log(goodtype)
+    // console.log(productId)
+    // console.log(goodtype)
     var that = this;
     wx.showModal({
       title: '云云实惠购提示您',
@@ -185,7 +205,7 @@ Page({
             wx.request({
               url: app.globalData.taobaodelcollectionurl,
               data: {
-                userId: app.globalData.userId,
+                userId: that.data.userId,
                 productIds: productId,
                 type:2
               },
@@ -212,7 +232,7 @@ Page({
             wx.request({
               url: app.globalData.taobaodelcollectionurl,
               data: {
-                userId: app.globalData.userId,
+                userId: that.data.userId,
                 productIds: productId,
                 type:1
               },

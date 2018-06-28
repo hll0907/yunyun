@@ -2,6 +2,7 @@ const app = getApp()
 
 Page({
   data: {
+    userId:'',
     send: false,
     alreadySend: false,
     second: 60,
@@ -11,7 +12,18 @@ Page({
     code: '',
     otherInfo: ''
   },
-  onLoad: function() {}, // 手机号部分
+  onLoad: function() {
+    var that = this;
+    wx.getStorage({
+      key: 'userId',
+      success: function (res) {
+        that.setData({
+          userId: res.data
+        })
+        console.log(res.data)
+      }
+    })
+  }, // 手机号部分
   inputPhoneNum: function(e) {
     let phoneNum = e.detail.value
     if (phoneNum.length === 11) {
@@ -194,7 +206,7 @@ Page({
   savePhone:function(){
     var that = this;
     wx.request({
-      url: app.globalData.dataurl + '/user/bind_phone_number?userId=' + app.globalData.userId + '&phoneNum=' + that.data.phoneNum + '&code=' + that.data.code + '&password=' + that.data.otherInfo,
+      url: app.globalData.dataurl + '/user/bind_phone_number?userId=' + that.data.userId + '&phoneNum=' + that.data.phoneNum + '&code=' + that.data.code + '&password=' + that.data.otherInfo,
       method: 'POST',
       header: {
         "Content-Type": "application/x-www-form-urlencoded"

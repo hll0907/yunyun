@@ -7,14 +7,24 @@ Page({
    * 页面的初始数据
    */
   data: {
-    order: ''
+    order: '',
+    userId:''
   },
 
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function(options) {
-
+    var that = this;
+    wx.getStorage({
+      key: 'userId',
+      success: function (res) {
+        that.setData({
+          userId: res.data
+        })
+        console.log(res.data)
+      }
+    })
   },
   addorder: function(e) {
     let order = e.detail.value
@@ -35,7 +45,7 @@ Page({
       // http://shg.yuf2.cn:8080/shg-api/api/order/submit_order?userId=790714&orderNo=1111
       var that = this;
       wx.request({
-        url: app.globalData.dataurl + '/order/submit_order?userId=' + app.globalData.userId + '&orderNo=' + that.data.order,
+        url: app.globalData.dataurl + '/order/submit_order?userId=' + that.data.userId + '&orderNo=' + that.data.order,
         method: 'POST',
         header: {
           "Content-Type": "application/x-www-form-urlencoded"

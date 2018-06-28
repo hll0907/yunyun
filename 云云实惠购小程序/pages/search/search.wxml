@@ -1,6 +1,6 @@
 <view class="search">
   <view class='fontright'>
-    <input class="search-input" placeholder="请输入搜索的商品名"  bindinput="bindInput" value="{{inputValue}}" />
+    <input class="search-input" placeholder="请输入搜索的商品名" bindinput="bindInput" value="{{inputValue}}" />
     <icon type="clear" size="20" bindtap="clearInput" />
     <button style="display:inline-block;font-size:24rpx;background:red;color:#ffffff;width:30%;" bindtap="setSearchStorage">搜索</button>
   </view>
@@ -46,8 +46,13 @@
           </view>
         </view>
         <view class="weui-loadmore" hidden="{{isHideLoadMore}}">
-          <view class="weui-loading"></view>
-          <view class="weui-loadmore__tips">商品加载完成....</view>
+          <view wx:if="{{nulldata==true}}">
+            <view class="weui-loadmore__tips">商品加载完成</view>
+          </view>
+          <view wx:else>
+            <view class="weui-loading"></view>
+            <view class="weui-loadmore__tips">正在加载中</view>
+          </view>
         </view>
       </view>
       <view wx:else style='text-align:center'>暂无商品</view>
@@ -87,8 +92,13 @@
           </view>
         </view>
         <view class="weui-loadmore" hidden="{{isHideLoadMore}}">
-          <view class="weui-loading"></view>
-          <view class="weui-loadmore__tips">商品加载完成....</view>
+          <view wx:if="{{jianglizuigaonulldata==true}}">
+            <view class="weui-loadmore__tips">商品加载完成</view>
+          </view>
+          <view wx:else>
+            <view class="weui-loading"></view>
+            <view class="weui-loadmore__tips">正在加载中</view>
+          </view>
         </view>
       </view>
       <view wx:else style='text-align:center'>暂无商品</view>
@@ -128,9 +138,14 @@
           </view>
         </view>
         <view class="weui-loadmore" hidden="{{isHideLoadMore}}">
-          <view class="weui-loading"></view>
-          <view class="weui-loadmore__tips">商品加载完成....</view>
-        </view>
+          <view wx:if="{{youhuizuidanulldata==true}}">
+            <view class="weui-loadmore__tips">商品加载完成</view>
+          </view>
+          <view wx:else>
+            <view class="weui-loading"></view>
+            <view class="weui-loadmore__tips">正在加载中</view>
+          </view>
+      </view>
       </view>
       <view wx:else style='text-align:center'>暂无商品</view>
       <view style="height:15px;"></view>
@@ -169,8 +184,13 @@
           </view>
         </view>
         <view class="weui-loadmore" hidden="{{isHideLoadMore}}">
-          <view  class="weui-loading"></view>
-          <view  class="weui-loadmore__tips">商品加载完成....</view>
+          <view wx:if="{{xiaoliangzuigaonulldata==true}}">
+            <view class="weui-loadmore__tips">商品加载完成</view>
+          </view>
+          <view wx:else>
+            <view class="weui-loading"></view>
+            <view class="weui-loadmore__tips">正在加载中</view>
+          </view>
           <!-- <view wx:else class="weui-loadmore__tips">{{isHideLoadMore}}正在加载中...</view> -->
         </view>
       </view>

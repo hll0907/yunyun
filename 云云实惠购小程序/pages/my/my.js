@@ -4,10 +4,20 @@ const app = getApp()
 Page({
   data: {
     userdata: [],
-    userId: app.globalData.userId
+    userId: 0
   },
   onLoad: function() {
-    this.getuserdata()
+    var that=this;
+    wx.getStorage({
+      key: 'userId',
+      success: function(res) {
+        that.setData({
+          userId: res.data
+        })
+        console.log(res.data)
+        that.getuserdata()
+      }
+    })
   },
   //账户设置
   usersetting: function() {
@@ -50,7 +60,7 @@ Page({
     wx.navigateTo({
       url: '../friend/friend'
     })
-  }, 
+  },
   // //我的客服
   // onclickcustomerService: function() {
   //   wx.navigateTo({
@@ -63,7 +73,7 @@ Page({
   getuserdata: function() {
     var that = this;
     wx.request({
-      url: app.globalData.dataurl + '/user/' + app.globalData.userId,
+      url: app.globalData.dataurl + '/user/' + that.data.userId,
       method: 'GET',
       header: {
         'content-Type': 'application/json'

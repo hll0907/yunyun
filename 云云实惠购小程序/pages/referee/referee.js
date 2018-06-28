@@ -14,12 +14,22 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function(options) {
-    this.getuserdata();
+    var that=this;
+    wx.getStorage({
+      key: 'userId',
+      success: function (res) {
+        that.setData({
+          userId: res.data
+        })
+        console.log(res.data)
+        that.getuserdata();
+      }
+    })
   },
   getuserdata: function() {
     var that = this;
     wx.request({
-      url: app.globalData.dataurl + '/user/' + app.globalData.userId,
+      url: app.globalData.dataurl + '/user/' + that.data.userId,
       method: 'GET',
       header: {
         'content-Type': 'application/json'

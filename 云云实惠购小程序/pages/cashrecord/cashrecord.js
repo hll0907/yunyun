@@ -1,14 +1,25 @@
 const app = getApp()
 Page({
   data: {
+    userId: 0,
     cashrecorddata: [],
     cashrecordpage: 1,
     // 页面配置  
     winWidth: 0,
-    winHeight: 0,
+    winHeight: 0
   },
   onLoad: function() {
     var that = this;
+    wx.getStorage({
+      key: 'userId',
+      success: function(res) {
+        that.setData({
+          userId: res.data
+        })
+        that.cashrecord();
+        console.log(res.data)
+      }
+    })
     //  获取系统信息 
     wx.getSystemInfo({
       success: function(res) {
@@ -19,10 +30,14 @@ Page({
       }
     });
     //http://shg.yuf2.cn:8080/shg-api/api/integral/extract?userId=337466&page=1
+
+  },
+  cashrecord: function() {
+    var that = this;
     wx.request({
       url: app.globalData.dataurl + '/integral/extract',
       data: {
-        userId: app.globalData.userId,
+        userId: that.data.userId,
         page: 1
       },
       method: 'GET',
@@ -35,6 +50,13 @@ Page({
           that.setData({
             cashrecorddata: res.data.result.list,
           });
+        }else{
+          wx.showToast({
+            title: '出错了',
+            icon: 'loading',
+            duration: 2000,
+            mask: true
+          })
         }
       }
     })
@@ -47,7 +69,7 @@ Page({
       wx.request({
         url: app.globalData.dataurl + '/integral/extract',
         data: {
-          userId: app.globalData.userId,
+          userId: that.data.userId,
           page: ++that.data.cashrecordpage
         },
         method: 'GET',

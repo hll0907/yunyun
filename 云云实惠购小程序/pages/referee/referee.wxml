@@ -1,7 +1,7 @@
 <!--pages/referee/referee.wxml-->
 <view style='background:#fd72a9;text-align:center;'>
   <view>
-    <image wx:if="{{code==0}}" class="userinfo-avatar" src="../../pages/images/icon_heads.png"></image>
+    <image wx:if="{{code==0}}" class="userinfo-avatar" src="../../pages/images/icon_logo.png"></image>
     <image wx:else class="userinfo-avatar" src="{{userdata.imageUrl}}"></image>
   </view>
   <view>

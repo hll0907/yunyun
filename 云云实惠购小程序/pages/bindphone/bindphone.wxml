@@ -1,10 +1,12 @@
 <view style='font-size:32rpx;background:#fd72a9'>
+  <view style='height:20rpx;'></view>
   <text style='color:#fff;margin:10rpx;'>请认真核对您的手机号哦</text>
+  <view style='height:20rpx;'></view>
 </view>
 <view>
   <view class="section">
     <text>手机号码</text>
-    <input placeholder="请输入手机号码" type="number" maxlength="11" bindinput="inputPhoneNum"  />
+    <input placeholder="请输入手机号码" type="number" maxlength="11" bindinput="inputPhoneNum" />
     <text wx:if="{{send}}" class="sendMsg" bindtap="sendMsg">发送</text>
     <text wx:if="{{alreadySend}}" class="sendMsg" bindtap="sendMsg">{{second+"s"}}</text>
   </view>

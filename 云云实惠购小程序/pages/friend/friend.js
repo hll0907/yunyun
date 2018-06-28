@@ -2,33 +2,44 @@
 const app = getApp();
 Page({
   data: {
+    userId: 0,
     frienddata: [],
-    friendpage:1,
+    friendpage: 1,
     // 页面配置  
     winWidth: 0,
     winHeight: 0,
-    friendId:''
+    friendId: ''
   },
   onLoad: function(options) {
     var that = this;
+    wx.getStorage({
+      key: 'userId',
+      success: function(res) {
+        that.setData({
+          userId: res.data
+        })
+        console.log(res.data)
+        that.getfrienddata()
+      }
+    })
     //  获取系统信息 
     wx.getSystemInfo({
-      success: function (res) {
+      success: function(res) {
         that.setData({
           winWidth: res.windowWidth,
           winHeight: res.windowHeight
         });
       }
     });
-    that.getfrienddata()
+
   },
   getfrienddata: function() {
     var that = this;
     wx.request({
       //http://shg.yuf2.cn:8080/shg-api/personal/seefriends?userId=22380&page=1&pageSize=10
-      url:  'https://shg.yuf2.cn/shg-api/personal/seefriends',
+      url: 'https://shg.yuf2.cn/shg-api/personal/seefriends',
       data: {
-        userId: app.globalData.userId,
+        userId: that.data.userId,
         page: 1,
         pageSize: 10
       },
@@ -47,14 +58,14 @@ Page({
     })
   },
   //好友上拉加载更多
-  friendloadMore: function (e) {
+  friendloadMore: function(e) {
     setTimeout(() => {
       // console.log('加载更多')
       var that = this;
       wx.request({
         url: 'https://shg.yuf2.cn/shg-api/personal/seefriends',
         data: {
-          userId: app.globalData.userId,
+          userId: that.data.userId,
           page: ++that.data.friendpage,
           pageSize: 10
         },
@@ -62,7 +73,7 @@ Page({
         header: {
           'content-Type': 'application/json'
         },
-        success: function (res) {
+        success: function(res) {
           // console.log(res.data);
           if (res.statusCode == 200) {
             console.log(res.data.result.list)
@@ -76,11 +87,11 @@ Page({
       })
     }, 1000)
   },
-  onclickfriends:function(e){
+  onclickfriends: function(e) {
     var friendId = e.currentTarget.dataset.id;
     console.log(friendId);
     wx.navigateTo({
-      url: '../friends/friends?friendId='+friendId
+      url: '../friends/friends?friendId=' + friendId
     })
   }
 })

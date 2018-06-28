@@ -17,5 +17,5 @@
     </view>
   </scroll-view>
   </view>
-  <view wx:else style='text-align:center'>暂无好友</view>
+  <view wx:else style='text-align:center;color:#999;'>---暂无好友---</view>
 </view>

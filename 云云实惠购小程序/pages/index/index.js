@@ -56,11 +56,6 @@ Page({
     });
     that.onclikjinxuan();
     //网络访问，获取轮播图的图片  
-    // util.getRecommend(function(data) {
-    //   that.setData({
-    //     slider: data.data.slider
-    //   })
-    // });
     banner.getbanner(function(data) {
       that.setData({
         banner: data.result,
@@ -80,6 +75,17 @@ Page({
     this.setData({
       swiperCurrent: e.currentTarget.id
     })
+  },
+  onShareAppMessage: function (res) {
+    if (res.from === 'button') {
+      // 来自页面内转发按钮
+      console.log(res.target)
+    }
+    return {
+      title: '【@我】快来使用云云实惠购',
+      path: '/pages/login/login',
+      imageUrl: ''
+    }
   },
   //轮播图点击跳转
   onclikUrl: function(event) {

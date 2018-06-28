@@ -1,0 +1,4 @@
+<!--pages/login/login.wxml-->
+<!-- 需要使用 button 来授权登录 -->
+<view style='text-align:center;'><image src='../../pages/images/icon_logo.png' class='userinfo-avatar'></image></view>
+<button wx:if="{{canIUse}}&&{{userInfo==''}}" open-type="getUserInfo" bindgetuserinfo="bindGetUserInfo" type='primary' class='buttonstyle'>使用微信登录</button>

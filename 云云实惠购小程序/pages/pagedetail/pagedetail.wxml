@@ -36,7 +36,7 @@
       <view style="height:4px;background:#f1f1f1"></view>
       <view class='fontright'>
         <label class='goodintegral'>约奖{{detail.integral}}积分</label>
-        <label style='color:#999' bindtap='showtip'>购物须知></label>
+        <label style='color:#999;font-size:42rpx;margin: 20rpx;' bindtap='showtip'>购物须知></label>
       </view>
       <view style="height:4px;background:#f1f1f1"></view>
       <view style='text-align:center;'>

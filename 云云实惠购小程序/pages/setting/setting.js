@@ -2,27 +2,40 @@ const app = getApp()
 
 Page({
   data: {
+    usetId: 0,
     userdata: [],
-    phone:''
+    phone: ''
   },
   onLoad: function() {
-    this.getuserdata();
+    var that = this;
+    wx.getStorage({
+      key: 'userId',
+      success: function(res) {
+        that.setData({
+          userId: res.data
+        })
+        console.log(res.data)
+        that.getuserdata();
+      }
+    })
   },
-  onShow:function(){
-    this.getuserdata();
-  },
-  getuserdata:function(){
+  // onShow: function() {
+  //   this.getuserdata();
+  // },
+  getuserdata: function() {
     var that = this;
     wx.request({
-      url: app.globalData.dataurl + '/user/' + app.globalData.userId,
+      url: app.globalData.dataurl + '/user/' + that.data.userId,
       method: 'GET',
-      header: { 'content-Type': 'application/json' },
-      success: function (res) {
+      header: {
+        'content-Type': 'application/json'
+      },
+      success: function(res) {
         // console.log(res.data);
         if (res.statusCode == 200) {
           that.setData({
             userdata: res.data.result,
-            phone:res.data.result.phone
+            phone: res.data.result.phone
           });
         }
       }
@@ -31,7 +44,7 @@ Page({
   usersetting: function() {
     var that = this;
     wx.request({
-      url: app.globalData.dataurl + '/user/' + app.globalData.userId + '/update/nickname',
+      url: app.globalData.dataurl + '/user/' + that.data.userId + '/update/nickname',
       header: {
         "Content-Type": "application/x-www-form-urlencoded"
       },
@@ -52,30 +65,30 @@ Page({
       }
     })
   },
-  showphone:function(){
+  showphone: function() {
     wx.showModal({
       title: '云云实惠购提示您',
       showCancel: false,
       confirmText: '我知道了',
-      content: this.data.phone+'\r\n 如需更换手机号码，请联系官方客服',
+      content: this.data.phone + '\r\n 如需更换手机号码，请联系官方客服',
     })
   },
-  bindphone:function(){
+  bindphone: function() {
     wx.navigateTo({
       url: '../bindphone/bindphone'
     })
   },
-  showylh:function(){
+  showylh: function() {
     wx.navigateTo({
       url: '../bindylh/bindylh'
     })
   },
-  bindalipay:function(){
+  bindalipay: function() {
     wx.navigateTo({
       url: '../bindalipay/bindalipay'
     })
   },
-  bindweixin:function(){
+  bindweixin: function() {
     wx.navigateTo({
       url: '../bindweixin/bindweixin'
     })

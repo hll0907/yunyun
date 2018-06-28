@@ -1,6 +1,7 @@
 const app = getApp()
 Page({
   data: {
+    userId:'',
     totalintegralrecorddata: [],
     orderintegralrecorddata: [],
     profitintegralrecorddata: [],
@@ -18,6 +19,16 @@ Page({
   },
   onLoad: function() {
     var that = this;
+    wx.getStorage({
+      key: 'userId',
+      success: function (res) {
+        that.setData({
+          userId: res.data
+        })
+        console.log(res.data)
+        that.totalintegral()
+      }
+    })
     //  获取系统信息 
     wx.getSystemInfo({
       success: function(res) {
@@ -27,7 +38,6 @@ Page({
         });
       }
     });
-    that.totalintegral()
   },
   //  滑动切换tab 
   bindChange: function(e) {
@@ -76,7 +86,7 @@ Page({
     wx.request({
       url: app.globalData.dataurl + '/integral/records',
       data: {
-        userId: app.globalData.userId,
+        userId: that.data.userId,
         type: 0,
         page: 1
       },
@@ -102,7 +112,7 @@ Page({
       wx.request({
         url: app.globalData.dataurl + '/integral/records',
         data: {
-          userId: app.globalData.userId,
+          userId: that.data.userId,
           type: 0,
           page: ++that.data.totalintegralrecordpage
         },
@@ -131,7 +141,7 @@ Page({
     wx.request({
       url: app.globalData.dataurl + '/integral/records',
       data: {
-        userId: app.globalData.userId,
+        userId: that.data.userId,
         type: 1,
         page: 1
       },
@@ -157,7 +167,7 @@ Page({
       wx.request({
         url: app.globalData.dataurl + '/integral/records',
         data: {
-          userId: app.globalData.userId,
+          userId: that.data.userId,
           type: 1,
           page: ++that.data.orderintegralrecordpage
         },
@@ -186,7 +196,7 @@ Page({
     wx.request({
       url: app.globalData.dataurl + '/integral/records',
       data: {
-        userId: app.globalData.userId,
+        userId: that.data.userId,
         type: 2,
         page: 1
       },
@@ -212,7 +222,7 @@ Page({
       wx.request({
         url: app.globalData.dataurl + '/integral/records',
         data: {
-          userId: app.globalData.userId,
+          userId: that.data.userId,
           type: 2,
           page: ++that.data.profitintegralrecordpage
         },
@@ -241,7 +251,7 @@ Page({
     wx.request({
       url: app.globalData.dataurl + '/integral/records',
       data: {
-        userId: app.globalData.userId,
+        userId: that.data.userId,
         type: 3,
         page: 1
       },
@@ -267,7 +277,7 @@ Page({
       wx.request({
         url: app.globalData.dataurl + '/integral/records',
         data: {
-          userId: app.globalData.userId,
+          userId: that.data.userId,
           type: 3,
           page: ++that.data.cashintegralrecordpage
         },

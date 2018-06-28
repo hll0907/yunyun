@@ -1,11 +1,12 @@
 {
   "pages": [
+    "pages/login/login",
     "pages/index/index",
     "pages/pin/pin",
-    "pages/pinCouponUrl/pinCouponUrl",        
+    "pages/pinCouponUrl/pinCouponUrl",
     "pages/friend/friend",
-    "pages/friends/friends",        
-    "pages/referee/referee",        
+    "pages/friends/friends",
+    "pages/referee/referee",
     "pages/submitorder/submitorder",
     "pages/customerService/customerService",
     "pages/orderrecord/orderrecord",
@@ -40,7 +41,7 @@
   "tabBar": {
     "color": "#818181",
     "selectedColor": "red",
-    "borderStyle": "white",
+    "borderStyle": "#fff",
     "list": [
       {
         "pagePath": "pages/index/index",

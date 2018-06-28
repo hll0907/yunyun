@@ -28,7 +28,7 @@
         <text class='goodsource'>{{detail.source}}</text>
         <text style='font-size:16px'>{{detail.title}}</text>
       </view>
-      <view wx:if="{{detail.couponPrice !=0}}">
+      <view wx:if="{{detail.couponPrice !=0}}" style='margin:5rpx;'>
         <text class='goodcoupon'>{{detail.couponPrice}}元优惠券 </text>
         <text class='goodcoupondetail'>剩余{{detail.couponSurplus}}张优惠券 </text>
         <text class='goodcoupondetail'>到期{{detail.couponEnd}} </text>
@@ -36,7 +36,7 @@
       <view style="height:4px;background:#f1f1f1"></view>
       <view class='fontright'>
         <label class='goodintegral'>约奖{{detail.integral}}积分</label>
-        <label style='color:#999' bindtap='showtip'>奖励说明></label>
+        <label style='color:#999;font-size: 42rpx;margin: 20rpx;' bindtap='showtip'>奖励说明></label>
       </view>
       <view style="height:4px;background:#f1f1f1"></view>
       <view style='text-align:center;'>
