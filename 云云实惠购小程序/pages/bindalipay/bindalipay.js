@@ -4,6 +4,7 @@ Page({
   data: {
     userId: '',
     alipayimgurl: '',
+    imgurl:''
   },
   onLoad: function() {
     var that = this;
@@ -13,7 +14,6 @@ Page({
         that.setData({
           userId: res.data
         })
-        console.log(res.data)
         that.getdata()
       }
     })
@@ -22,7 +22,6 @@ Page({
   getdata: function() {
     var that = this;
     var time = new Date;
-    console.log(Date.parse(time))
     wx.request({
       url: app.globalData.dataurl + '/user/' + that.data.userId,
       method: 'GET',
@@ -35,6 +34,7 @@ Page({
           if (res.data.code == 1) {
             that.setData({
               alipayimgurl: res.data.result.alipay + '?time' + Date.parse(time),
+              imgurl: res.data.result.alipay
             });
           }
         } else {
@@ -65,7 +65,6 @@ Page({
       success: function(res) {
         // 返回选定照片的本地文件路径列表，tempFilePath可以作为img标签的src属性显示图片
         var tempFilePaths = res.tempFilePaths
-        console.log(tempFilePaths)
         that.setData({
           alipayimgurl: tempFilePaths
         })
@@ -74,7 +73,6 @@ Page({
           filePath: tempFilePaths[0],
           name: 'alipay',
           success: function(res) {
-            console.log(res)
             //do something
             wx.showToast({
               title: '上传成功',
@@ -84,6 +82,14 @@ Page({
             })
             wx.navigateTo({
               url: '../setting/setting'
+            })
+          },
+          fail:function(){
+            wx.showToast({
+              title: '出错了',
+              icon: 'loading',
+              duration: 4000,
+              mask: true
             })
           }
         })

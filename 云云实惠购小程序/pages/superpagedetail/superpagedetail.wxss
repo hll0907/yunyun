@@ -53,7 +53,8 @@
 
 .goodintegral {
   color: #f80;
-  margin-left: 10rpx;
+  font-size:42rpx;
+  margin: 20rpx;
 }
 
 .goodprice {

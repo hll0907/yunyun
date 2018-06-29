@@ -70,7 +70,6 @@ Page({
         }
       }
     })
-
   },
   showtip: function(e) {
     wx.showModal({
@@ -82,9 +81,14 @@ Page({
   },
   onclickBuy: function(e) {
     var that = this;
+    wx.showToast({
+      title: '正在加载中',
+      icon: 'loading',
+      duration: 2000,
+      mask: true
+    })
     // that.onclickconvert_url();
     that.onclickconvert_url();
-
   },
   onclickconvert_url: function(e) {
     var that = this;

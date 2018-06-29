@@ -22,7 +22,6 @@ Page({
         that.setData({
           userId: res.data
         })
-        console.log(res.data)
         that.getintegral()
       }
     })
@@ -30,7 +29,6 @@ Page({
   },
   getintegral: function() {
     var that = this;
-    console.log(that.data.userId)
     wx.request({
       url: app.globalData.dataurl + '/integral/total?userId=' + that.data.userId,
       method: 'GET',
@@ -38,7 +36,6 @@ Page({
         'content-Type': 'application/json'
       },
       success: function(res) {
-        console.log(res.data);
         if (res.statusCode == 200) {
           that.setData({
             whiteIntegral: res.data.result.whiteIntegral,
@@ -68,7 +65,6 @@ Page({
         money: totalintertal / 700
       })
     }
-    console.log(totalintertal)
   },
   inputfocus: function(e) {
     var that = this;
@@ -155,7 +151,6 @@ Page({
         "Content-Type": "application/x-www-form-urlencoded"
       },
       success: function(res) {
-        console.log(res.data);
         if (res.statusCode == 200) {
           if (res.data.code == 1) {
             wx.showModal({
@@ -187,7 +182,6 @@ Page({
         "Content-Type": "application/x-www-form-urlencoded"
       },
       success: function(res) {
-        console.log(res.data);
         if (res.statusCode == 200) {
           if (res.data.code == 1) {
             wx.showModal({
@@ -220,7 +214,6 @@ Page({
         "Content-Type": "application/x-www-form-urlencoded"
       },
       success: function(res) {
-        console.log(res.data);
         if (res.statusCode == 200) {
           if (res.data.code == 1) {
             wx.showModal({

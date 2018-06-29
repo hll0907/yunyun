@@ -3,7 +3,8 @@ const app = getApp()
 Page({
   data: {
     userId: 0,
-    weixinimgurl: ''
+    weixinimgurl: '',
+    imgurl:''
   },
   onLoad: function() {
     var that = this;
@@ -13,7 +14,6 @@ Page({
         that.setData({
           userId: res.data
         })
-        console.log(res.data)
         that.getdata();
       }
     })
@@ -22,7 +22,6 @@ Page({
   getdata: function() {
     var that = this;
     var time = new Date;
-    console.log(Date.parse(time))
     wx.request({
       url: app.globalData.dataurl + '/user/' + that.data.userId,
       method: 'GET',
@@ -34,6 +33,7 @@ Page({
         if (res.statusCode == 200) {
           that.setData({
             weixinimgurl: res.data.result.wxMoneyQrcode + '?time' + Date.parse(time),
+            imgurl: res.data.result.wxMoneyQrcode
           });
         }else{
           wx.showToast({
@@ -63,7 +63,6 @@ Page({
       success: function(res) {
         // 返回选定照片的本地文件路径列表，tempFilePath可以作为img标签的src属性显示图片
         var tempFilePaths = res.tempFilePaths
-        console.log(tempFilePaths)
         that.setData({
           weixinimgurl: tempFilePaths
         })
@@ -72,7 +71,6 @@ Page({
           filePath: tempFilePaths[0],
           name: 'qrcode',
           success: function(res) {
-            console.log(res)
             //do something
             wx.showToast({
               title: '上传成功',
@@ -82,6 +80,14 @@ Page({
             })
             wx.navigateTo({
               url: '../setting/setting'
+            })
+          },
+          fail: function () {
+            wx.showToast({
+              title: '出错了',
+              icon: 'loading',
+              duration: 2000,
+              mask: true
             })
           }
         })

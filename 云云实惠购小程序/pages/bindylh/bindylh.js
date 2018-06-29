@@ -16,7 +16,6 @@ Page({
         that.setData({
           userId: res.data
         })
-        console.log(res.data)
       }
     })
   }, // 手机号部分
@@ -28,7 +27,6 @@ Page({
         this.setData({
           phoneNum: phoneNum
         })
-        console.log('phoneNum：' + this.data.phoneNum)
         this.activeButton()
       }
     } else {
@@ -57,7 +55,6 @@ Page({
       code: e.detail.value
     })
     this.activeButton()
-    console.log('code' + this.data.code)
   },
   // 按钮
   activeButton: function() {
@@ -65,7 +62,6 @@ Page({
       phoneNum,
       code,
     } = this.data
-    console.log(code)
     if (phoneNum && code) {
       this.setData({
         disabled: false,
@@ -83,7 +79,6 @@ Page({
   },
   savePhone: function() {
     var that = this;
-    //bind_ylh?userId=790714&ylhId=11&ylhPhone=11
     wx.request({
       url: app.globalData.dataurl + '/user/bind_ylh?userId=' + that.data.userId + '&ylhId=' + that.data.code + '&ylhPhone=' + that.data.phoneNum,
       method: 'POST',
@@ -91,7 +86,6 @@ Page({
         "Content-Type": "application/x-www-form-urlencoded"
       },
       success: function(res) {
-        console.log(res.data);
         if (res.statusCode == 200) {
           if (res.data.code == 1) {
             wx.showToast({
@@ -114,7 +108,6 @@ Page({
                   wx.navigateTo({
                     url: '../setting/setting'
                   });
-                  console.log('确定')
                 }
               }
             })

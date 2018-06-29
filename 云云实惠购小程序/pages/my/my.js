@@ -14,7 +14,6 @@ Page({
         that.setData({
           userId: res.data
         })
-        console.log(res.data)
         that.getuserdata()
       }
     })

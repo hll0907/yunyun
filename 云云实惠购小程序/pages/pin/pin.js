@@ -58,7 +58,7 @@ Page({
     return {
       title: '【@我】快来使用云云实惠购',
       path: '/pages/login/login',
-      imageUrl: ''
+      imageUrl: '/pages/images/icon_logo.png'
     }
   },
   //  滑动切换tab 

@@ -17,7 +17,6 @@ Page({
           userId: res.data
         })
         that.cashrecord();
-        console.log(res.data)
       }
     })
     //  获取系统信息 
@@ -29,8 +28,6 @@ Page({
         });
       }
     });
-    //http://shg.yuf2.cn:8080/shg-api/api/integral/extract?userId=337466&page=1
-
   },
   cashrecord: function() {
     var that = this;
@@ -45,7 +42,6 @@ Page({
         'content-Type': 'application/json'
       },
       success: function(res) {
-        // console.log(res.data.result.list);
         if (res.statusCode == 200) {
           that.setData({
             cashrecorddata: res.data.result.list,

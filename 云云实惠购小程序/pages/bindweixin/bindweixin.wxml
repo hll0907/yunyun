@@ -5,7 +5,8 @@
 </view>
 <view>
   <view style='text-align:center;margin:10px;'>
-    <image src='{{weixinimgurl}}' style='width:520rpx;height:700rpx;border:1px solid #999' alt="暂无图片"></image>
+    <image wx:if="{{imgurl==''}}" src='../../pages/images/icon_logo.png' style='width:520rpx;height:700rpx;border:1px solid #999' alt="暂无图片"></image>
+    <image wx:else src='{{weixinimgurl}}' style='width:520rpx;height:700rpx;border:1px solid #999' alt="暂无图片"></image>
   </view>
   <button style='background:red;color:#fff' bindtap="onSubmit">点击上传微信收款码</button>
 </view>

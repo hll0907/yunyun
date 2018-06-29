@@ -23,12 +23,14 @@ Page({
           if (res.authSetting['scope.userInfo']) {
             wx.getUserInfo({
               success: function(res) {
-                console.log(res.userInfo)
+                // console.log(res)
                 //用户已经授权过
                 that.userlogin()
                 that.setData({
                   userInfo: res.userInfo
                 })
+                // console.log("============================================")
+                // console.log(that.data.userInfo)
               },
               fail: function() {
                 this.bindGetUserInfo();
@@ -57,9 +59,25 @@ Page({
     })
   },
   bindGetUserInfo: function(e) {
+    var that = this;
     if (e.detail.userInfo) {
       //用户按了允许授权按钮
-      this.userlogin()
+      var that = this;
+      wx.getUserInfo({
+        success: function(res) {
+          // console.log(res)
+          //用户已经授权过
+          that.userlogin()
+          that.setData({
+            userInfo: res.userInfo
+          })
+          // console.log("---------------------------------------------------")
+          // console.log(that.data.userInfo)
+        },
+        fail: function() {
+          this.bindGetUserInfo();
+        }
+      })
     } else {
       //用户按了拒绝按钮
       wx.showModal({
@@ -70,21 +88,10 @@ Page({
         confirmColor: 'red',
         success: function(res) {
           if (res.confirm) {
-            console.log('确定')
+            console.log('用户拒绝了')
           }
         }
       })
-    }
-  },
-  onShareAppMessage: function (res) {
-    if (res.from === 'button') {
-      // 来自页面内转发按钮
-      console.log(res.target)
-    }
-    return {
-      title: '【@我】快来使用云云实惠购',
-      path: '/pages/index/index',
-      imageUrl: ''
     }
   },
   userlogin: function() {
@@ -96,31 +103,23 @@ Page({
           //2、调用获取用户信息接口
           wx.getUserInfo({
             success: function(res) {
-              console.log({
-                encryptedData: res.encryptedData,
-                iv: res.iv,
-                code: code
-              })
+              // console.log(res)
               wx.request({
-                url: 'http://127.0.0.1:8080/api/v1/wechat/weixin-access',
+                url: 'https://shg.yuf2.cn/shg-api/api/v1/wechat/weixin-access',
                 data: {
                   code: code,
-                  encryptedData: res.encryptedData,
-                  iv: res.iv,
+                  userdata:res.rawData
                 },
                 header: {
                   "Content-Type": "application/x-www-form-urlencoded"
                 },
                 method: 'POST',
                 success: function(res) {
-                  console.log(res.data.result)
-                  console.log(res.data)
-
-                  // console.log(res.data.result.userData)
-                  // console.log(res.data.result.userData.userId)
+                  // console.log(res.data.result)
+                  // console.log(res.data)
                   // 4.解密成功后 获取自己服务器返回的结果
                   if (res.data.code == 1) {
-                    if (res.data.result.userData.userId != '' || res.data.result.sessionKey != '' || res.data.result.appOpenid != '') {
+                    if (res.data.result.userData.userId != '' || res.data.result.sessionKey != '') {
                       wx.switchTab({
                         url: '../../pages/index/index',
                       })

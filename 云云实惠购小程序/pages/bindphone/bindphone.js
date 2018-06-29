@@ -20,7 +20,6 @@ Page({
         that.setData({
           userId: res.data
         })
-        console.log(res.data)
       }
     })
   }, // 手机号部分
@@ -32,7 +31,6 @@ Page({
         this.setData({
           phoneNum: phoneNum
         })
-        console.log('phoneNum：' + this.data.phoneNum)
         this.showSendMsg()
         this.activeButton()
       }
@@ -76,7 +74,6 @@ Page({
   },
   sendMsg: function() {
     var that = this;
-    // http://shg.yuf2.cn:8080/shg-api/api/user/send_message?mobile=1231231231230
     wx.request({
       url: app.globalData.dataurl + '/user/send_message?mobile=' + that.data.phoneNum,
       method: 'POST',
@@ -84,7 +81,6 @@ Page({
         "Content-Type": "application/x-www-form-urlencoded"
       },
       success: function(res) {
-        console.log(res.data);
         if (res.statusCode == 200) {
           if (res.data.code == 1) {
             wx.showToast({
@@ -137,7 +133,6 @@ Page({
       otherInfo: e.detail.value
     })
     this.activeButton()
-    console.log('otherInfo: ' + this.data.otherInfo)
   },
   // 验证码
   addCode: function(e) {
@@ -155,7 +150,6 @@ Page({
       code,
       otherInfo
     } = this.data
-    console.log(code)
     if (phoneNum && code && otherInfo) {
       this.setData({
         disabled: false,
@@ -173,7 +167,6 @@ Page({
   },
   checkPhone:function(){
     var that = this;
-    // http://shg.yuf2.cn:8080/shg-api/api/user/send_message?mobile=1231231231230
     wx.request({
       url: app.globalData.dataurl + '/user/mobile_auth?phoneNum=' + that.data.phoneNum,
       method: 'POST',
@@ -184,12 +177,6 @@ Page({
         console.log(res.data);
         if (res.statusCode == 200) {
           if (res.data.code == 1) {
-            // wx.showToast({
-            //   title: res.data.message,
-            //   icon: 'success',
-            //   duration: 2000,
-            //   mask: true
-            // })
             that.savePhone();
           } else {
             wx.showToast({
@@ -212,7 +199,6 @@ Page({
         "Content-Type": "application/x-www-form-urlencoded"
       },
       success: function (res) {
-        console.log(res.data);
         if (res.statusCode == 200) {
           if (res.data.code == 1) {
             wx.showToast({
